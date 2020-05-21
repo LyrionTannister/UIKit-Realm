@@ -7,19 +7,20 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct PhotoResponse: Decodable {
-    var response: PhotoList
+class PhotoResponse: Object, Decodable {
+    @objc dynamic var response: PhotoList
 }
 
-struct PhotoList: Decodable {
-    var items: [PhotoItems]
+class PhotoList: Object, Decodable {
+    @objc dynamic var items: [PhotoItems]
 }
 
-struct PhotoItems: Decodable {
-    var sizes: [Sizes]
+class PhotoItems: Object, Decodable {
+    @objc dynamic var sizes: [Sizes]
 }
 
-struct Sizes: Decodable {
-    var url: String?
+class Sizes: Object, Decodable {
+    @objc dynamic var url: String?
 }
