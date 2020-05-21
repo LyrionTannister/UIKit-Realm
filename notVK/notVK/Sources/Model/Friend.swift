@@ -17,12 +17,12 @@ struct FriendList: Decodable {
     var items: [FriendItem]
 }
 
-struct FriendItem: Decodable {
-    var firstName: String
-    var lastName: String
-    var online: Int
-    var photo100: String?
-    var id: Int
+struct FriendItem: Object, Decodable {
+    @objc dynamic var firstName: String
+    @objc dynamic var lastName: String
+    @objc dynamic var online: Int
+    @objc dynamic var photo100: String?
+    @objc dynamic var id: Int
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
         case lastName = "last_name"
