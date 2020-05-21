@@ -9,13 +9,13 @@
 import Foundation
 import RealmSwift
 
-class GroupResponse: Object, Decodable {
-    @objc dynamic var response: GroupList
+class GroupResponse: Decodable {
+    var response: GroupList
 }
 
-class GroupList: Object, Decodable {
-    @objc dynamic var count: Int
-    @objc dynamic var items: [GroupItem]
+class GroupList: Decodable {
+    var count: Int
+    var items: [GroupItem]
 }
 
 class GroupItem: Object, Decodable {

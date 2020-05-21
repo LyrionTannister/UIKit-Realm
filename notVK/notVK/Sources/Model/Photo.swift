@@ -9,12 +9,12 @@
 import Foundation
 import RealmSwift
 
-class PhotoResponse: Object, Decodable {
-    @objc dynamic var response: PhotoList
+class PhotoResponse: Decodable {
+    var response: PhotoList
 }
 
-class PhotoList: Object, Decodable {
-    @objc dynamic var items: [PhotoItems]
+class PhotoList: Decodable {
+    var items: [PhotoItems]
 }
 
 class PhotoItems: Object, Decodable {
