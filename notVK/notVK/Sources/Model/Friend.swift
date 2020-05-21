@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import RealmSwift
 
-struct FriendResponse: Decodable {
+class FriendResponse: Decodable {
     var response: FriendList
 }
 
-struct FriendList: Decodable {
+class FriendList: Decodable {
     var count: Int
     var items: [FriendItem]
 }
 
-struct FriendItem: Object, Decodable {
+class FriendItem: Object, Decodable {
     @objc dynamic var firstName: String
     @objc dynamic var lastName: String
     @objc dynamic var online: Int

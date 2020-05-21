@@ -5,7 +5,7 @@ target 'notVK' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod 'Realm', '~>5.0.0',:modular_headers => true
-  #pod 'RealmSwift', '~> 5.0.0', :modular_headers => true
+  pod 'RealmSwift', '~> 5.0.0', :modular_headers => true
   # Pods for notVK
 
 end
