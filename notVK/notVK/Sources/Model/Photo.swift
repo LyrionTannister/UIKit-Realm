@@ -18,9 +18,9 @@ class PhotoList: Decodable {
 }
 
 class PhotoItems: Object, Decodable {
-    @objc dynamic var sizes: [Sizes]
+    @objc dynamic var sizes: [Sizes] = []
 }
 
 class Sizes: Object, Decodable {
-    @objc dynamic var url: String?
+    @objc dynamic var url: String? = ""
 }

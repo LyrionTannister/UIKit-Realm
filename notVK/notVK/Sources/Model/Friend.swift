@@ -19,11 +19,11 @@ class FriendList: Decodable {
 }
 
 class FriendItem: Object, Decodable {
-    @objc dynamic var firstName: String
-    @objc dynamic var lastName: String
-    @objc dynamic var online: Int
-    @objc dynamic var photo100: String?
-    @objc dynamic var id: Int
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
+    @objc dynamic var online: Int = 0
+    @objc dynamic var photo100: String? = ""
+    @objc dynamic var id: Int = 0
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
         case lastName = "last_name"
