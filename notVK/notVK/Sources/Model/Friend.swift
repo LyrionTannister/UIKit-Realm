@@ -7,22 +7,23 @@
 //
 
 import UIKit
+import RealmSwift
 
-struct FriendResponse: Decodable {
+class FriendResponse: Decodable {
     var response: FriendList
 }
 
-struct FriendList: Decodable {
+class FriendList: Decodable {
     var count: Int
     var items: [FriendItem]
 }
 
-struct FriendItem: Decodable {
-    var firstName: String
-    var lastName: String
-    var online: Int
-    var photo100: String?
-    var id: Int
+class FriendItem: Object, Decodable {
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
+    @objc dynamic var online: Int = 0
+    @objc dynamic var photo100: String? = ""
+    @objc dynamic var id: Int = 0
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
         case lastName = "last_name"
