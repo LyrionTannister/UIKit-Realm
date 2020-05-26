@@ -14,7 +14,7 @@ class RealmRequestDelegate {
     
     private init() {}
     
-    func saveObjects<T: Object>(_ objects: [T]) {
+    func commitObjects<T: Object>(_ objects: [T]) {
         do {
             let realm = try Realm()
             realm.beginWrite()
@@ -25,7 +25,7 @@ class RealmRequestDelegate {
         }
     }
     
-    func fetchObjects<T: Object>(_ type: T.Type) -> [T]? {
+    func retrieveObjects<T: Object>(_ type: T.Type) -> [T]? {
         do {
             let realm = try Realm()
             return realm.objects(type).map{$0}
@@ -38,7 +38,7 @@ class RealmRequestDelegate {
     func deleteObjects<T: Object>(_ type: T.Type) {
         do {
             let realm = try Realm()
-            if let objects = fetchObjects(type) {
+            if let objects = retrieveObjects(type) {
                 realm.beginWrite()
                 realm.delete(objects)
                 try realm.commitWrite()

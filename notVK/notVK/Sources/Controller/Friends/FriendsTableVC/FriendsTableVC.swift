@@ -12,7 +12,7 @@ class FriendsTableViewController: UITableViewController {
 
     @IBOutlet weak var searchTextField: UITextField!
 
-    var friendResponse: FriendResponse? = nil
+    var friendsContainer: [FriendItem]? = nil
 
     struct Section <T> {
         var title: String
@@ -44,7 +44,7 @@ class FriendsTableViewController: UITableViewController {
         VKRequestDelegate.loadFriends { [weak self] (result) in
             switch result {
             case .success(let friendResponse):
-                self?.friendResponse = friendResponse
+                self?.friendsContainer = friendResponse
                 self?.tableView.reloadData()
             case .failure(let error):
                 print("error: ", error)
@@ -59,7 +59,7 @@ class FriendsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friendResponse?.response.items.count ?? 0
+        return friendsContainer?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -70,9 +70,11 @@ class FriendsTableViewController: UITableViewController {
         //cell.myFriendLabel.text = friends.firstName + " " + friends.lastName
         //cell.shadowLayer.image.image = UIImage(named: friends.fotoPath)
         
-        cell.myFriendLabel.text = (friendResponse?.response.items[indexPath.row].lastName ?? "") + " " + (friendResponse?.response.items[indexPath.row].firstName ?? "")
+        if let currentFriends = friendsContainer?[indexPath.row] {
+          cell.myFriendLabel.text = currentFriends.lastName + " " + currentFriends.firstName
+        }
 
-        if let photoURL = URL(string: (friendResponse?.response.items[indexPath.row].photo100)!) {
+        if let photoURL = URL(string: (friendsContainer?[indexPath.row].photo100)!) {
             cell.shadowLayer.image.image = UIImage(data: try! Data(contentsOf: photoURL as URL))
         }
         return cell
@@ -106,9 +108,9 @@ class FriendsTableViewController: UITableViewController {
     func getSortedUsers(searchText: String?) -> [Character:[FriendItem]]?{
         var tempUsers: [FriendItem]?
         if let text = searchText?.lowercased(), searchText != "" {
-            tempUsers = friendResponse?.response.items.filter{ $0.lastName.lowercased().contains(text)}
+            tempUsers = friendsContainer?.filter{ $0.lastName.lowercased().contains(text)}
         } else {
-            tempUsers = friendResponse?.response.items
+            tempUsers = friendsContainer
         }
         if let isUsersExists = tempUsers {
             let sortedUsers = Dictionary.init(grouping: isUsersExists) { $0.lastName.lowercased().first! }.mapValues{ $0.sorted{ $0.lastName.lowercased() < $1.lastName.lowercased() } }
