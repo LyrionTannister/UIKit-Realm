@@ -12,44 +12,35 @@ class FriendsTableViewController: UITableViewController {
 
     @IBOutlet weak var searchTextField: UITextField!
 
-    var friendsContainer: [FriendItem]? = nil
-
-    struct Section <T> {
-        var title: String
-        var items: [T]
-    }
-
-    var friendsSection = [Section<FriendItem>]()
-    var friendsDictionary : [Character:[FriendItem]]?
-    var firstLetters: [Character]? {
-        get {
-            friendsDictionary?.keys.sorted() ?? nil
-        }
-    }
+    var friendsContainer = [FriendItem]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        friendsDictionary = self.getSortedUsers(searchText: nil)
-        //sortedFriends(friends: allMyFriends)
-        //let friendsFinder : [FriendItem]? = Dictionary.init(grouping: friendResponse?.response.items ?? nil) { $0.last_name.prefix(1)}
-        //friendsSection = friendsFinder.map {Section(title: String($0.key), items: $0.value)}
-        //friendsSection.sort {$0.title < $1.title}
+        
+        fetchFriends()
 
         // MARK: - Table view properties
 
         self.clearsSelectionOnViewWillAppear = false
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        //self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
 
-        VKRequestDelegate.loadFriends { [weak self] (result) in
+    private func fetchFriends() {
+        VKRequestDelegate.loadFriends { result in
             switch result {
-            case .success(let friendResponse):
-                self?.friendsContainer = friendResponse
-                self?.tableView.reloadData()
+            case .success:
+                self.fetchFriendsFromRealm()
             case .failure(let error):
-                print("error: ", error)
+                self.fetchFriendsFromRealm()
+                print(error)
             }
         }
+    }
+
+    private func fetchFriendsFromRealm() {
+        guard let friendsFromRealm = RealmRequestDelegate.shared.retrieveObjects(FriendItem.self) else { return }
+        self.friendsContainer = friendsFromRealm
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -59,22 +50,16 @@ class FriendsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friendsContainer?.count ?? 0
+        return friendsContainer.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
 
-        //let friends = friendsSection[indexPath.section].items[indexPath.row]
-
-        //cell.myFriendLabel.text = friends.firstName + " " + friends.lastName
-        //cell.shadowLayer.image.image = UIImage(named: friends.fotoPath)
+        let currentFriends = friendsContainer[indexPath.row]
+        cell.myFriendLabel.text = currentFriends.lastName + " " + currentFriends.firstName
         
-        if let currentFriends = friendsContainer?[indexPath.row] {
-          cell.myFriendLabel.text = currentFriends.lastName + " " + currentFriends.firstName
-        }
-
-        if let photoURL = URL(string: (friendsContainer?[indexPath.row].photo100)!) {
+        if let photoURL = URL(string: (currentFriends.photo100)!) {
             cell.shadowLayer.image.image = UIImage(data: try! Data(contentsOf: photoURL as URL))
         }
         return cell
@@ -108,7 +93,7 @@ class FriendsTableViewController: UITableViewController {
     func getSortedUsers(searchText: String?) -> [Character:[FriendItem]]?{
         var tempUsers: [FriendItem]?
         if let text = searchText?.lowercased(), searchText != "" {
-            tempUsers = friendsContainer?.filter{ $0.lastName.lowercased().contains(text)}
+            tempUsers = friendsContainer.filter{ $0.lastName.lowercased().contains(text)}
         } else {
             tempUsers = friendsContainer
         }

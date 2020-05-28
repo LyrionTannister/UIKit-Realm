@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0912E364244CB858001FEC20 /* GroupsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0912E363244CB858001FEC20 /* GroupsFactory.swift */; };
 		0912E367244CE36C001FEC20 /* FriendsPhotosLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0912E366244CE36C001FEC20 /* FriendsPhotosLayouts.swift */; };
 		0924EF5924511032003EAB35 /* RotationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0924EF5824511032003EAB35 /* RotationAnimator.swift */; };
 		0924EF5B2451B5D2003EAB35 /* CustomSwipeCloseTrans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0924EF5A2451B5D2003EAB35 /* CustomSwipeCloseTrans.swift */; };
@@ -51,7 +50,6 @@
 
 /* Begin PBXFileReference section */
 		050DCFCCAC3995B0BB58C50F /* Pods-notVK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notVK.release.xcconfig"; path = "Target Support Files/Pods-notVK/Pods-notVK.release.xcconfig"; sourceTree = "<group>"; };
-		0912E363244CB858001FEC20 /* GroupsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsFactory.swift; sourceTree = "<group>"; };
 		0912E366244CE36C001FEC20 /* FriendsPhotosLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosLayouts.swift; sourceTree = "<group>"; };
 		0924EF5824511032003EAB35 /* RotationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationAnimator.swift; sourceTree = "<group>"; };
 		0924EF5A2451B5D2003EAB35 /* CustomSwipeCloseTrans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwipeCloseTrans.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				0944FF112435FC93001918FB /* Group.swift */,
 				094D5383244498D500387523 /* Friend.swift */,
 				8440DA7C24729A9200A72D9B /* Photo.swift */,
-				0912E363244CB858001FEC20 /* GroupsFactory.swift */,
 				845DAB5F246D70D2003439FD /* Session.swift */,
 				845DAB66246D78E4003439FD /* VKDataSelector.swift */,
 			);
@@ -482,7 +479,6 @@
 				84509F132461D6D100E04BB3 /* ViewController.swift in Sources */,
 				09805C522442194B00926BF9 /* ImageRoundedShadowed.swift in Sources */,
 				0944FF032435E4AE001918FB /* GroupsTableVC.swift in Sources */,
-				0912E364244CB858001FEC20 /* GroupsFactory.swift in Sources */,
 				845DAB67246D78E4003439FD /* VKDataSelector.swift in Sources */,
 				0944FF0A2435F0FE001918FB /* AllGroupsTableVCell.swift in Sources */,
 			);
