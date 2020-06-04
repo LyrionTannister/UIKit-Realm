@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
 
     @IBOutlet weak var searchTextField: UITextField!
 
     var friendsContainer = [FriendItem]()
+    private var token: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +42,32 @@ class FriendsTableViewController: UITableViewController {
     private func fetchFriendsFromRealm() {
         guard let friendsFromRealm = RealmRequestDelegate.shared.retrieveObjects(FriendItem.self) else { return }
         self.friendsContainer = friendsFromRealm
-        self.tableView.reloadData()
-    }
+            self.configureRealmNotifications()
+        }
+
+        private func configureRealmNotifications() {
+            guard let realm = try? Realm() else { return }
+            token = realm.objects(FriendItem.self).observe({ [weak self] changes in
+                switch changes {
+                case .initial:
+                    self?.tableView.reloadData()
+                case .update(_,
+                             deletions: let deletions,
+                             insertions: let insertions,
+                             modifications: let modifications):
+                    self?.tableView.beginUpdates()
+                    self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                               with: .automatic)
+                    self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                               with: .automatic)
+                    self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                               with: .automatic)
+                    self?.tableView.endUpdates()
+                case .error(let error):
+                    fatalError(error.localizedDescription)
+                }
+            })
+        }
 
     // MARK: - Table view data source
 

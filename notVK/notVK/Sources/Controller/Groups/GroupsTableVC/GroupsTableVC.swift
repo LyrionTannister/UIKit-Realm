@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupsTableViewController: UITableViewController {
 
     var groupsContainer = [GroupItem]()
+    private var token: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +37,31 @@ class GroupsTableViewController: UITableViewController {
     private func fetchGroupsFromRealm() {
         guard let groupsFromRealm = RealmRequestDelegate.shared.retrieveObjects(GroupItem.self) else { return }
         self.groupsContainer = groupsFromRealm
-        self.tableView.reloadData()
+        self.configureRealmNotifications()
+    }
+
+    private func configureRealmNotifications() {
+        guard let realm = try? Realm() else { return }
+        token = realm.objects(GroupItem.self).observe({ [weak self] changes in
+            switch changes {
+            case .initial:
+                self?.tableView.reloadData()
+            case .update(_,
+                         deletions: let deletions,
+                         insertions: let insertions,
+                         modifications: let modifications):
+                self?.tableView.beginUpdates()
+                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .automatic)
+                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                           with: .automatic)
+                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .automatic)
+                self?.tableView.endUpdates()
+            case .error(let error):
+                fatalError(error.localizedDescription)
+            }
+        })
     }
 
     // MARK: - Table view data source
