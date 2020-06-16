@@ -26,7 +26,7 @@ class VKRequestDelegate {
         return request
     }
 
-    static func loadGroups(completion: @escaping (Result<GroupResponse, Error>) -> Void ) {
+    static func loadGroups(completion: @escaping (Result<[GroupItem], Error>) -> Void ) {
         let urlString = VKDataSelector.shared.baseUrl + VKDataSelector.Method.getGroups.methodName + "?access_token=\(Session.shared.token)&extended=1&v=5.103"
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -39,7 +39,9 @@ class VKRequestDelegate {
                 guard let data = data else { return }
                 do {
                     let group = try JSONDecoder().decode(GroupResponse.self, from: data)
-                    completion(.success(group))
+                    RealmRequestDelegate.shared.deleteObjects(GroupItem.self)
+                    RealmRequestDelegate.shared.commitObjects(group.response.items)
+                    completion(.success(group.response.items))
                 } catch let jsonError {
                     print("FAILED TO DECODE JSON", jsonError)
                     completion(.failure(jsonError))
@@ -48,7 +50,7 @@ class VKRequestDelegate {
         }.resume()
     }
 
-    static func loadFriends(completion: @escaping (Result<FriendResponse, Error>) -> Void) {
+    static func loadFriends(completion: @escaping (Result<[FriendItem], Error>) -> Void) {
         let urlString = VKDataSelector.shared.baseUrl + VKDataSelector.Method.getFriends.methodName + "?access_token=\(Session.shared.token)&extended=1&v=5.103&fields=photo_100"
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -61,7 +63,9 @@ class VKRequestDelegate {
                 guard let data = data else { return }
                 do {
                     let friend = try JSONDecoder().decode(FriendResponse.self, from: data)
-                    completion(.success(friend))
+                    RealmRequestDelegate.shared.deleteObjects(FriendItem.self)
+                    RealmRequestDelegate.shared.commitObjects(friend.response.items)
+                    completion(.success(friend.response.items))
                 } catch let jsonError {
                     print("FAILED TO DECODE JSON", jsonError)
                     completion(.failure(jsonError))

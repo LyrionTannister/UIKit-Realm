@@ -7,24 +7,61 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupsTableViewController: UITableViewController {
 
-    var groupResponse: GroupResponse? = nil
+    var groupsContainer = [GroupItem]()
+    private var token: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.clearsSelectionOnViewWillAppear = false
+
+        fetchGroups()
         
-        VKRequestDelegate.loadGroups { [weak self] (result) in
-            switch result {
-            case .success(let groupResponse):
-                self?.groupResponse = groupResponse
-                self?.tableView.reloadData()
-            case .failure(let error):
-                print("error: ", error)
+        // MARK: - Table view properties
+        self.clearsSelectionOnViewWillAppear = false
+    }
+    
+    private func fetchGroups() {
+        VKRequestDelegate.loadGroups { result in switch result {
+        case .success:
+            self.fetchGroupsFromRealm()
+        case .failure(let error):
+            self.fetchGroupsFromRealm()
+            print(error)
             }
         }
+    }
+    
+    private func fetchGroupsFromRealm() {
+        guard let groupsFromRealm = RealmRequestDelegate.shared.retrieveObjects(GroupItem.self) else { return }
+        self.groupsContainer = groupsFromRealm
+        self.configureRealmNotifications()
+    }
+
+    private func configureRealmNotifications() {
+        guard let realm = try? Realm() else { return }
+        token = realm.objects(GroupItem.self).observe({ [weak self] changes in
+            switch changes {
+            case .initial:
+                self?.tableView.reloadData()
+            case .update(_,
+                         deletions: let deletions,
+                         insertions: let insertions,
+                         modifications: let modifications):
+                self?.tableView.beginUpdates()
+                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .automatic)
+                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                           with: .automatic)
+                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .automatic)
+                self?.tableView.endUpdates()
+            case .error(let error):
+                fatalError(error.localizedDescription)
+            }
+        })
     }
 
     // MARK: - Table view data source
@@ -34,14 +71,17 @@ class GroupsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupResponse?.response.count ?? 0
+        return groupsContainer.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as! GroupsViewCell
-        //cell.imageRoundedShadowed.image.image = UIImage(named: group.name)
-        cell.myGroupLabel.text = groupResponse?.response.items[indexPath.row].name ?? ""
-        if let photoURL = URL(string: (groupResponse?.response.items[indexPath.row].photo50)!) {
+
+        let currentGroup = groupsContainer[indexPath.row]
+        
+        cell.myGroupLabel.text = currentGroup.name
+
+        if let photoURL = URL(string: (currentGroup.photo50)!) {
             cell.imageRoundedShadowed.image.image = UIImage(data: try! Data(contentsOf: photoURL as URL))
         }
         return cell
