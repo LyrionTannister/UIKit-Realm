@@ -106,4 +106,57 @@ class VKRequestDelegate {
             }
         }.resume()
     }
+
+    static func loadNews(completion: @escaping (Result<[NewsItem], Error>) -> Void) {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/newsfeed.get"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "access_token", value: "\(Session.shared.token)"),
+            URLQueryItem(name: "filters", value: "post"),
+            URLQueryItem(name: "start_from", value: "next_from"),
+            URLQueryItem(name: "count", value: "20"),
+            URLQueryItem(name: "v", value: "5.103"),
+        ]
+        let request = URLRequest(url: urlComponents.url!)
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("some error")
+                    completion(.failure(error))
+                    return
+                }
+                guard let data = data else { return }
+                do {
+                    let photo = try JSONDecoder().decode(PhotoResponse.self, from: data)
+                    completion(.success(photo))
+                } catch let jsonError {
+                    print("FAILED TO DECODE JSON", jsonError)
+                    completion(.failure(jsonError))
+                }
+            }
+        }.resume()
+        //--------
+        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
+            
+            if error != nil {
+                onError(ServerError.errorTask)
+            }
+            
+            guard let data = data else {
+                onError(ServerError.noDataProvided)
+                return
+            }
+            guard let news = try? JSONDecoder().decode(Response<NewsModel>.self, from: data).response.items else {
+                onError(ServerError.failedToDecode)
+                return
+            }
+            DispatchQueue.main.async {
+                onComplete(news)
+            }
+        }
+        task.resume()
+    }
 }
