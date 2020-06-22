@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import RealmSwift
 
-class NewsItem: Codable {
+class NewsItem: Object, Codable {
     let postID: Int
     let text: String
     let date: Double
@@ -65,7 +66,7 @@ class NewsItem: Codable {
     }
     
     func getStringDate() -> String {
-        let dateFormatter = DateFormatterVK()
+        let dateFormatter = DateFormatter()
         return dateFormatter.convertDate(timeIntervalSince1970: date)
     }
 }

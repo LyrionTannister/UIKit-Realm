@@ -130,33 +130,15 @@ class VKRequestDelegate {
                 }
                 guard let data = data else { return }
                 do {
-                    let photo = try JSONDecoder().decode(PhotoResponse.self, from: data)
-                    completion(.success(photo))
+                    let news = try JSONDecoder().decode(Response<NewsItem>.self, from: data)
+                    //RealmRequestDelegate.shared.deleteObjects(NewsItem.self)
+                    //RealmRequestDelegate.shared.commitObjects(news.response.items)
+                    completion(.success(news.response.items))
                 } catch let jsonError {
                     print("FAILED TO DECODE JSON", jsonError)
                     completion(.failure(jsonError))
                 }
             }
         }.resume()
-        //--------
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
-            if error != nil {
-                onError(ServerError.errorTask)
-            }
-            
-            guard let data = data else {
-                onError(ServerError.noDataProvided)
-                return
-            }
-            guard let news = try? JSONDecoder().decode(Response<NewsModel>.self, from: data).response.items else {
-                onError(ServerError.failedToDecode)
-                return
-            }
-            DispatchQueue.main.async {
-                onComplete(news)
-            }
-        }
-        task.resume()
     }
 }
