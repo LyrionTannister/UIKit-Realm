@@ -89,6 +89,7 @@
 		845DAB62246D74B7003439FD /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		845DAB64246D7661003439FD /* VKRequestDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKRequestDelegate.swift; sourceTree = "<group>"; };
 		845DAB66246D78E4003439FD /* VKDataSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDataSelector.swift; sourceTree = "<group>"; };
+		8468469124A0D4FE00E8384F /* News.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = News.storyboard; path = "/Users/admin/Developing/MyProjects/UIKit-Realm/notVK/notVK/Resources/News.storyboard"; sourceTree = "<absolute>"; };
 		84962F6C2461F4DB007F1232 /* CustomSectionDesign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSectionDesign.swift; sourceTree = "<group>"; };
 		B910C674E3B00F06541361DD /* Pods-notVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notVK.debug.xcconfig"; path = "Target Support Files/Pods-notVK/Pods-notVK.debug.xcconfig"; sourceTree = "<group>"; };
 		E39DCB62CE468E7C040C1C66 /* Pods_notVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -284,6 +285,7 @@
 				09805C46244063E300926BF9 /* Groups.storyboard */,
 				09997FCF2432B1E6003891DA /* MainScreen.storyboard */,
 				09805C422440631700926BF9 /* Main.storyboard */,
+				8468469124A0D4FE00E8384F /* News.storyboard */,
 				09997FD72432B1ED003891DA /* LaunchScreen.storyboard */,
 				09997FD52432B1ED003891DA /* Assets.xcassets */,
 			);
@@ -307,6 +309,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8468468F24A0CED300E8384F /* News */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
 		84962F6E2461F856007F1232 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,6 +333,7 @@
 		84962F6F2461F8BF007F1232 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8468468F24A0CED300E8384F /* News */,
 				09805C452440638400926BF9 /* Login Screen */,
 				09EDD034243967CF00B8DAF6 /* Delegates */,
 				09805C48244063F600926BF9 /* Groups */,
