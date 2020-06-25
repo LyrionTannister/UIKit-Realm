@@ -11,7 +11,7 @@ import RealmSwift
 
 class NewsTableViewController: UITableViewController {
 
-    let networkService = VKRequestDelegate()
+    let vkNewsService = VKNewsService()
 
     override func loadView() {
         super.loadView()
@@ -22,9 +22,9 @@ class NewsTableViewController: UITableViewController {
         super.viewDidLoad()
         fetchNews()
     }
-
-    private func fetchNews() {
-        VKRequestDelegate.loadNews { result in
+    
+    func fetchNews () -> Void {
+        vkNewsService.loadNews { result in
             switch result {
             case .success(let newsResponse):
                 self.view().newsTableView.news = newsResponse

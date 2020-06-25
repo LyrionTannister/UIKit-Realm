@@ -13,21 +13,21 @@ class NewsView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         addSubview(newsTableView)
-        
+
         newsTableView.translatesAutoresizingMaskIntoConstraints = false
         newsTableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         newsTableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         newsTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         newsTableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
-    
-    func setNews(news: [NewsItem]) {
+
+    func setNews(news: NewsItems?) {
         self.newsTableView.news = news
     }
     
@@ -35,8 +35,8 @@ class NewsView: UIView {
 
 class NewsTableView: UITableView {
     
-    var news = [NewsItem]()
-    var imageDelegate: ImageDelegate?
+    var news : NewsItems?
+    var imageDelegate : ImageDelegate?
     
     init(){
         super.init(frame: .zero, style: .grouped)
@@ -67,7 +67,6 @@ class NewsTableView: UITableView {
         }
         return images
     }
-    
 }
 
 extension NewsTableView: UITableViewDelegate {
@@ -76,13 +75,13 @@ extension NewsTableView: UITableViewDelegate {
 
 extension NewsTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return news.count
+        return news?.items.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dequeueReusableCell(withIdentifier: NewsTableViewCell.reusedID, for: indexPath) as! NewsTableViewCell
 
-        let post = news[indexPath.row]
+        let post = news.items[indexPath.row]
 
         cell.dateLabel.text = post.getStringDate()
         cell.titleLabel.text = post.text
