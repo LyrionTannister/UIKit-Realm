@@ -27,7 +27,7 @@ class NewsTableViewController: UITableViewController {
         vkNewsService.loadNews { result in
             switch result {
             case .success(let newsResponse):
-                self.view().newsTableView.news = newsResponse
+                self.view().newsTableView.news = newsResponse.items
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)

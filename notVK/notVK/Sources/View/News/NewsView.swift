@@ -26,8 +26,8 @@ class NewsView: UIView {
         newsTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         newsTableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
-
-    func setNews(news: NewsItems?) {
+    
+    func setNews(news: [NewsItem]) {
         self.newsTableView.news = news
     }
     
@@ -35,8 +35,8 @@ class NewsView: UIView {
 
 class NewsTableView: UITableView {
     
-    var news : NewsItems?
-    var imageDelegate : ImageDelegate?
+    var news = [NewsItem]()
+    var imageDelegate: ImageDelegate?
     
     init(){
         super.init(frame: .zero, style: .grouped)
@@ -67,6 +67,7 @@ class NewsTableView: UITableView {
         }
         return images
     }
+    
 }
 
 extension NewsTableView: UITableViewDelegate {
@@ -75,13 +76,13 @@ extension NewsTableView: UITableViewDelegate {
 
 extension NewsTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return news?.items.count
+        return news.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dequeueReusableCell(withIdentifier: NewsTableViewCell.reusedID, for: indexPath) as! NewsTableViewCell
 
-        let post = news.items[indexPath.row]
+        let post = news[indexPath.row]
 
         cell.dateLabel.text = post.getStringDate()
         cell.titleLabel.text = post.text
