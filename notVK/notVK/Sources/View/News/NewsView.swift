@@ -36,7 +36,7 @@ class NewsView: UIView {
 class NewsTableView: UITableView {
     
     var news = [NewsItem]()
-    var imageDelegate: ImageDelegate?
+    var ImageService: ImageService?
     
     init(){
         super.init(frame: .zero, style: .grouped)
@@ -45,7 +45,7 @@ class NewsTableView: UITableView {
         
         rowHeight = UITableView.automaticDimension
         estimatedRowHeight = UITableView.automaticDimension
-        imageDelegate = ImageDelegate(container: self)
+        ImageService = ImageService(container: self)
         
         backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.reusedID)
@@ -60,7 +60,7 @@ class NewsTableView: UITableView {
     func loadImages(indexPath: IndexPath, urls: [String]) -> [UIImage]?{
         var images = [UIImage]()
         for url in urls {
-            if let image = self.imageDelegate?.photo(atIndexpath: indexPath, byUrl: url) {
+            if let image = self.ImageService?.photo(atIndexpath: indexPath, byUrl: url) {
                 images.append(image)
                 self.cellForRow(at: indexPath)?.reloadInputViews()
             }
