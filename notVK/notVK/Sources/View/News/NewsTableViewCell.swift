@@ -20,19 +20,21 @@ class NewsTableViewCell: UITableViewCell {
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         return avatarView
     }()
-    
+
     let labelCreator: UILabel = {
         let labelCreator = UILabel()
         labelCreator.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         labelCreator.translatesAutoresizingMaskIntoConstraints = false
         return labelCreator
     }()
+
     let dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.textColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         return dateLabel
     }()
+
     let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
@@ -40,24 +42,24 @@ class NewsTableViewCell: UITableViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         return titleLabel
     }()
+
     let commentButton: UIButton = {
         let commentButton = UIButton()
         commentButton.setImage(UIImage(systemName: "bubble.right"), for: .normal)
         commentButton.translatesAutoresizingMaskIntoConstraints = false
         return commentButton
     }()
+
     let repostButton: UIButton = {
         let repostButton = UIButton()
         repostButton.setImage(UIImage(systemName: "arrowshape.turn.up.left"), for: .normal)
         repostButton.translatesAutoresizingMaskIntoConstraints = false
         return repostButton
     }()
-    
+
     var photoView = PhotoView()
     let likeControl = LikeControl()
-    
-    
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -118,40 +120,38 @@ class NewsTableViewCell: UITableViewCell {
         ])
             }
 
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
     }
     override func layoutSubviews() {
         super.layoutSubviews()
     }
-
 }
 
 class  PhotoView: UIView {
-    
+
     var photos: [UIImage?]?
-    
+
     let imageView = UIImageView()
     let collageView1 = UIImageView()
     let collageView2 = UIImageView()
     let collageView3 = UIImageView()
     let collageView4 = UIImageView()
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         self.setImages()
     }
-    
+
     func setImages(){
         guard let photos = photos, !photos.isEmpty else {
             return
