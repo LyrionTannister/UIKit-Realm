@@ -22,14 +22,14 @@ class NewsItems: Decodable {
     var profiles: [FriendItem]
     var groups: [GroupItem]
     var nextFrom: String
-    
+
     enum CodingKeys: String, CodingKey {
         case items
         case profiles
         case groups
         case nextFrom = "next_from"
     }
-    
+
     init(items: [NewsItem], profiles: [FriendItem], groups: [GroupItem], nextFrom: String) {
         self.items = items
         self.profiles = profiles
@@ -38,23 +38,22 @@ class NewsItems: Decodable {
     }
 }
 
-
 // MARK: - Item
 class NewsItem: Decodable {
-    var type: String = ""
+    var type : String = ""
     var sourceID = 0
     var date: Int = 0
-    var postType = ""
-    var text: String = ""
-    var attachments: [Attachment] = []
-    var photos: PhotoList?
-    var comments: Comments?
-    var likesNews: LikesNews?
-    var repostsNews: RepostsNews?
-    var views: Views?
-    var isFavorite: Bool = false
-    var postID: Int = 0
-    
+    var postType : String? = ""
+    var text : String? = ""
+    var attachments : [Attachment]? = []
+    var photos : PhotoList?
+    var comments : Comments?
+    var likesNews : LikesNews?
+    var repostsNews : RepostsNews?
+    var views : Views?
+    var isFavorite : Bool = false
+    var postID : Int = 0
+
     required convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -63,48 +62,17 @@ class NewsItem: Decodable {
         sourceID = try container.decode(Int.self, forKey: .sourceID)
         date = try container.decode(Int.self, forKey: .date)
         type = try container.decode(String.self, forKey: .type)
-        if let arr = try container.decodeIfPresent(LikesNews.self, forKey: .likesNews) {
-            self.likesNews = arr
-        } else {
-            self.likesNews = nil
-        }
-        if let arr = try container.decodeIfPresent(Comments.self, forKey: .comments) {
-            self.comments = arr
-        } else {
-            self.comments = nil
-        }
-        if let arr = try container.decodeIfPresent(RepostsNews.self, forKey: .repostsNews) {
-            self.repostsNews = arr
-        } else {
-            self.repostsNews = nil
-        }
-        if let arr = try container.decodeIfPresent(Views.self, forKey: .views) {
-            self.views = arr
-        } else {
-            self.views = nil
-        }
-        if let postType = try container.decodeIfPresent(String.self, forKey: .postType) {
-            self.postType = postType
-        } else {
-            self.postType = ""
-        }
-        if let text = try container.decodeIfPresent(String.self, forKey: .text) {
-            self.text = text
-        } else {
-            self.text = ""
-        }
-        if let arr = try container.decodeIfPresent(PhotoList.self, forKey: .photos) {
-            self.photos = arr
-        } else {
-            self.photos = nil
-        }
-        if let arr = try container.decodeIfPresent(Array<Attachment>.self, forKey: .attachments) {
-            self.attachments = arr
-        } else {
-            self.attachments = []
-        }
+
+        likesNews = try? container.decodeIfPresent(LikesNews.self, forKey: .likesNews)
+        comments = try? container.decodeIfPresent(Comments.self, forKey: .comments)
+        repostsNews = try? container.decodeIfPresent(RepostsNews.self, forKey: .repostsNews)
+        views = try? container.decodeIfPresent(Views.self, forKey: .views)
+        postType = try? container.decodeIfPresent(String.self, forKey: .postType)
+        text = try? container.decodeIfPresent(String.self, forKey: .text)
+        photos = try? container.decodeIfPresent(PhotoList.self, forKey: .photos)
+        attachments = try? container.decodeIfPresent([Attachment].self, forKey: .attachments)
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case type
         case sourceID = "source_id"
@@ -131,7 +99,7 @@ class NewsItem: Decodable {
 
 // MARK: - Attachment
 class Attachment: Decodable {
-    var type: String = ""
+    var type: String? = ""
     var photo: PhotoItems?
     var link: Link?
     var video: Video?
@@ -142,26 +110,15 @@ class Attachment: Decodable {
         case link
         case video
     }
-    
+
     required convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(String.self, forKey: .type)
-        if let arr = try container.decodeIfPresent(PhotoItems.self, forKey: .photo) {
-            self.photo = arr
-        } else {
-            self.photo = nil
-        }
-        if let arr = try container.decodeIfPresent(Link.self, forKey: .link) {
-            self.link = arr
-        } else {
-            self.link = nil
-        }
-        if let arr = try container.decodeIfPresent(Video.self, forKey: .video) {
-            self.video = arr
-        } else {
-            self.video = nil
-        }
+
+        type = try? container.decodeIfPresent(String.self, forKey: .type)
+        photo = try? container.decodeIfPresent(PhotoItems.self, forKey: .photo)
+        link = try? container.decodeIfPresent(Link.self, forKey: .link)
+        video = try? container.decodeIfPresent(Video.self, forKey: .video)
     }
     
 }
@@ -172,10 +129,11 @@ class Link: Decodable {
     var title = ""
     var caption: String = ""
     var photo : PhotoItems?
-    
+
     enum CodingKeys: String, CodingKey {
         case url, title, caption, photo
     }
+
     required convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -218,7 +176,7 @@ class Video: Decodable {
     var trackCode = ""
     var type: String = ""
     var views: Int = 0
-    
+
     enum CodingKeys: String, CodingKey {
         case accessKey = "access_key"
         case canComment = "can_comment"
@@ -256,7 +214,7 @@ class FirstFrame: Decodable {
         case height, url, width
         case withPadding = "with_padding"
     }
-    
+
     init(height: Int, url: String, width: Int, withPadding: Int?) {
         self.height = height
         self.url = url
@@ -283,7 +241,7 @@ class Comments: Decodable {
 // MARK: - LikesNews
 class LikesNews: Decodable {
     var count, userLikes, canLike, canPublish: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case count
         case userLikes = "user_likes"

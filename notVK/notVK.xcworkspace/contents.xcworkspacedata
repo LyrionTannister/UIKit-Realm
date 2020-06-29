@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/admin/Developing/MyProjects/UIKit-Realm/notVK/notVK/Resources/News.storyboard">
-   </FileRef>
-   <FileRef
       location = "group:notVK.xcodeproj">
    </FileRef>
    <FileRef

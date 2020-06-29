@@ -22,9 +22,9 @@ class NewsTableViewController: UITableViewController {
         super.viewDidLoad()
         fetchNews()
     }
-    
+
     func fetchNews () -> Void {
-        vkNewsService.loadNews { result in
+        vkNewsService.loadNews { [weak self] result in
             switch result {
             case .success(let newsResponse):
                 self.view().newsTableView.news = newsResponse.items
