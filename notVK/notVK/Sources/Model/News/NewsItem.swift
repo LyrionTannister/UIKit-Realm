@@ -64,4 +64,5 @@ class NewsItem: Decodable {
         }
         return (likes.count, likes.userLikes>0)
     }
+    
 }

@@ -27,4 +27,5 @@ class NewsItems: Decodable {
         self.groups = groups
         self.nextFrom = nextFrom
     }
+    
 }

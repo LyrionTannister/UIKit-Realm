@@ -55,4 +55,5 @@ class Video: Decodable {
         
         id = try container.decode(Int.self, forKey: .id)
     }
+    
 }

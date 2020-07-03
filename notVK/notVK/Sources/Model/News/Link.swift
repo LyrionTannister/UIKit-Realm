@@ -27,4 +27,5 @@ class Link: Decodable {
         caption = try? container.decodeIfPresent(String.self, forKey: .caption)
         photo = try? container.decodeIfPresent(PhotoItems.self, forKey: .photo)
     }
+    
 }

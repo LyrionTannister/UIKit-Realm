@@ -24,4 +24,5 @@ class LikesNews: Decodable {
         self.canLike = canLike
         self.canPublish = canPublish
     }
+    
 }

@@ -14,4 +14,5 @@ class Views: Decodable {
     init(count: Int) {
         self.count = count
     }
+    
 }

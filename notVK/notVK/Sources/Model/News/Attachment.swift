@@ -30,4 +30,5 @@ class Attachment: Decodable {
         link = try? container.decodeIfPresent(Link.self, forKey: .link)
         video = try? container.decodeIfPresent(Video.self, forKey: .video)
     }
+    
 }

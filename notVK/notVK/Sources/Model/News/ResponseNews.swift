@@ -14,4 +14,5 @@ class ResponseNews: Decodable {
     init(response: NewsItems) {
         self.response = response
     }
+    
 }

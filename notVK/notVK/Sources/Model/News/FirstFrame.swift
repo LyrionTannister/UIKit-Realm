@@ -25,4 +25,5 @@ class FirstFrame: Decodable {
         self.width = width
         self.withPadding = withPadding
     }
+    
 }

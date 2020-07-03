@@ -20,4 +20,5 @@ class RepostsNews: Decodable {
         self.count = count
         self.userReposted = userReposted
     }
+    
 }

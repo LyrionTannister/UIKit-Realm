@@ -27,4 +27,5 @@ class OnlineInfo: Decodable {
         self.appID = appID
         self.isMobile = isMobile
     }
+    
 }

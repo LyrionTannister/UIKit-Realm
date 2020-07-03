@@ -20,4 +20,5 @@ class Comments: Decodable {
         self.count = count
         self.canPost = canPost
     }
+    
 }
