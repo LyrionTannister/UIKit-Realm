@@ -1,5 +1,5 @@
 //
-//  Comments.swift
+//  NewsComments.swift
 //  notVK
 //
 //  Created by Admin on 30.06.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Comments: Decodable {
+class NewsComments: Decodable {
+    
     var count, canPost: Int
 
     enum CodingKeys: String, CodingKey {

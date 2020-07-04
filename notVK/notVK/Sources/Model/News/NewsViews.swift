@@ -1,5 +1,5 @@
 //
-//  Views.swift
+//  NewsViews.swift
 //  notVK
 //
 //  Created by Admin on 30.06.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Views: Decodable {
+class NewsViews: Decodable {
+    
     var count: Int
 
     init(count: Int) {

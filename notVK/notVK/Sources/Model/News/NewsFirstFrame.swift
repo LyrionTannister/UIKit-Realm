@@ -1,5 +1,5 @@
 //
-//  FirstFrame.swift
+//  NewsFirstFrame.swift
 //  notVK
 //
 //  Created by Admin on 30.06.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class FirstFrame: Decodable {
+class NewsFirstFrame: Decodable {
+    
     var height: Int
     var url: String
     var width: Int
@@ -20,10 +21,12 @@ class FirstFrame: Decodable {
     }
 
     init(height: Int, url: String, width: Int, withPadding: Int?) {
+        
         self.height = height
         self.url = url
         self.width = width
         self.withPadding = withPadding
+        
     }
     
 }

@@ -9,6 +9,7 @@
 import UIKit
 
 class NewsItems: Decodable {
+
     var items: [NewsItem]
     var profiles: [FriendItem]
     var groups: [GroupItem]
@@ -21,7 +22,11 @@ class NewsItems: Decodable {
         case nextFrom = "next_from"
     }
 
-    init(items: [NewsItem], profiles: [FriendItem], groups: [GroupItem], nextFrom: String) {
+    init(items: [NewsItem],
+         profiles: [FriendItem],
+         groups: [GroupItem],
+         nextFrom: String
+    ) {
         self.items = items
         self.profiles = profiles
         self.groups = groups

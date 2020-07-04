@@ -1,5 +1,5 @@
 //
-//  RepostsNews.swift
+//  NewsRepostsNews.swift
 //  notVK
 //
 //  Created by Admin on 30.06.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class RepostsNews: Decodable {
+class NewsRepostsNews: Decodable {
+    
     var count, userReposted: Int
 
     enum CodingKeys: String, CodingKey {

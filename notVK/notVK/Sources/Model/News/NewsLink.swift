@@ -1,5 +1,5 @@
 //
-//  Link.swift
+//  NewsLink.swift
 //  notVK
 //
 //  Created by Admin on 30.06.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Link: Decodable {
+class NewsLink: Decodable {
+    
     var url: String = ""
     var title = ""
     var caption: String? = ""
@@ -19,6 +20,7 @@ class Link: Decodable {
     }
 
     required convenience init(from decoder: Decoder) throws {
+        
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -26,6 +28,7 @@ class Link: Decodable {
         title = try container.decode(String.self, forKey: .title)
         caption = try? container.decodeIfPresent(String.self, forKey: .caption)
         photo = try? container.decodeIfPresent(PhotoItems.self, forKey: .photo)
+        
     }
     
 }

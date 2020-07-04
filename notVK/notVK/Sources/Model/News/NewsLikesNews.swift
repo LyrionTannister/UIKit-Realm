@@ -1,5 +1,5 @@
 //
-//  LikesNews.swift
+//  NewsLikesNews.swift
 //  notVK
 //
 //  Created by Admin on 30.06.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class LikesNews: Decodable {
+class NewsLikesNews: Decodable {
+    
     var count, userLikes, canLike, canPublish: Int
 
     enum CodingKeys: String, CodingKey {

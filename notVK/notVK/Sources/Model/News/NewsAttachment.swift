@@ -1,5 +1,5 @@
 //
-//  Attachment.swift
+//  NewsAttachment.swift
 //  notVK
 //
 //  Created by Admin on 30.06.2020.
@@ -8,20 +8,24 @@
 
 import Foundation
 
-class Attachment: Decodable {
+class NewsAttachment: Decodable {
+    
     var type: String? = ""
     var photo: PhotoItems?
     var link: Link?
     var video: Video?
     
     enum CodingKeys: String, CodingKey {
+        
         case type
         case photo
         case link
         case video
+        
     }
 
     required convenience init(from decoder: Decoder) throws {
+        
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -29,6 +33,7 @@ class Attachment: Decodable {
         photo = try? container.decodeIfPresent(PhotoItems.self, forKey: .photo)
         link = try? container.decodeIfPresent(Link.self, forKey: .link)
         video = try? container.decodeIfPresent(Video.self, forKey: .video)
+        
     }
     
 }

@@ -1,5 +1,5 @@
 //
-//  OnlineInfo.swift
+//  NewsOnlineInfo.swift
 //  notVK
 //
 //  Created by Admin on 30.06.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class OnlineInfo: Decodable {
+class NewsOnlineInfo: Decodable {
+    
     var visible: Bool
     var isOnline: Bool?
     var appID: Int?

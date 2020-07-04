@@ -1,5 +1,5 @@
 //
-//  Video.swift
+//  NewsVideo.swift
 //  notVK
 //
 //  Created by Admin on 30.06.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Video: Decodable {
+class NewsVideo: Decodable {
+    
     var accessKey: String = ""
     var canComment = 0
     var canLike = 0
@@ -20,8 +21,8 @@ class Video: Decodable {
     var date = 0
     var videoDescription: String = ""
     var duration: Int = 0
-    var image: [FirstFrame] = []
-    var firstFrame: [FirstFrame] = []
+    var image: [NewsFirstFrame] = []
+    var firstFrame: [NewsFirstFrame] = []
     var width = 0
     var height = 0
     var id = 0
@@ -49,6 +50,7 @@ class Video: Decodable {
         case trackCode = "track_code"
         case type, views
     }
+    
     required convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)

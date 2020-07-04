@@ -1,5 +1,5 @@
 //
-//  ResponseNews.swift
+//  NewsResponseNews.swift
 //  notVK
 //
 //  Created by Admin on 30.06.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class ResponseNews: Decodable {
+class NewsResponseNews: Decodable {
+    
     var response: NewsItems
     
     init(response: NewsItems) {
