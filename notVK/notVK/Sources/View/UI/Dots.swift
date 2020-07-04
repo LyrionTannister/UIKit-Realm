@@ -8,7 +8,9 @@
 
 import UIKit
 
-@IBDesignable class Dots: UIImageView {
+@IBDesignable
+
+class Dots: UIImageView {
     override class var layerClass: AnyClass {
           return CAShapeLayer.self
       }

@@ -10,8 +10,8 @@ import UIKit
 
 class AllGroupsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var friendName: UILabel!
-    @IBOutlet weak var friendPhoto: ImageRoundedShadowed!
+    @IBOutlet private weak var friendName: UILabel!
+    @IBOutlet private weak var friendPhoto: ImageRoundedShadowed!
 
     override func awakeFromNib() {
         super.awakeFromNib()

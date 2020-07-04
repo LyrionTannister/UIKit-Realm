@@ -287,11 +287,11 @@
 			isa = PBXGroup;
 			children = (
 				09997FC92432B1E6003891DA /* AppDelegate.swift */,
-				09997FCB2432B1E6003891DA /* SceneDelegate.swift */,
-				845DAB64246D7661003439FD /* VKRequestDelegate.swift */,
-				8440DA7E247D2E8E00A72D9B /* RealmRequestDelegate.swift */,
 				8481EBF524A0E86500ABC2C0 /* DateFormatter.swift */,
 				8481EC0024A0F44E00ABC2C0 /* LikeControl.swift */,
+				8440DA7E247D2E8E00A72D9B /* RealmRequestDelegate.swift */,
+				09997FCB2432B1E6003891DA /* SceneDelegate.swift */,
+				845DAB64246D7661003439FD /* VKRequestDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -409,8 +409,8 @@
 		8481EBF924A0EF9C00ABC2C0 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				8481EBFA24A0EFF500ABC2C0 /* NewsView.swift */,
 				8481EBFC24A0F0D900ABC2C0 /* NewsTableViewCell.swift */,
+				8481EBFA24A0EFF500ABC2C0 /* NewsView.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -427,13 +427,13 @@
 		84962F6E2461F856007F1232 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8481EBF924A0EF9C00ABC2C0 /* News */,
 				0944FF092435F0FE001918FB /* AllGroupsTableVCell.swift */,
 				09A879DE243A76FC00FF7C06 /* FindFriendsTableVCell.swift */,
 				09EE39A72438237C00E5326B /* FriendsColVCell.swift */,
 				09A7D56824363098003B3881 /* FriendsTableVCell.swift */,
 				0944FF042435EA2C001918FB /* GroupsVCell.swift */,
 				0912E365244CE34C001FEC20 /* Layouts */,
+				8481EBF924A0EF9C00ABC2C0 /* News */,
 				09EE39A02438138000E5326B /* UI */,
 			);
 			path = View;

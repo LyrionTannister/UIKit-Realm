@@ -10,8 +10,8 @@ import UIKit
 
 class GroupsViewCell: UITableViewCell {
 
-    @IBOutlet weak var myGroupLabel: UILabel!
-    @IBOutlet weak var imageRoundedShadowed: ImageRoundedShadowed!
+    @IBOutlet private weak var myGroupLabel: UILabel!
+    @IBOutlet private weak var imageRoundedShadowed: ImageRoundedShadowed!
 
     override func awakeFromNib() {
         super.awakeFromNib()
