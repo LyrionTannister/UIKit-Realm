@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:notVK/Resources/Base.lproj/NewsScreen.storyboard">
+   </FileRef>
+   <FileRef
       location = "group:notVK.xcodeproj">
    </FileRef>
    <FileRef

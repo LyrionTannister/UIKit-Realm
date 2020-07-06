@@ -7,35 +7,9 @@
 //
 
 import UIKit
-import RealmSwift
 
 class NewsTableViewController: UITableViewController {
 
-    let vkNewsService = VKNewsService()
-
-    override func loadView() {
-        super.loadView()
-        self.view = NewsView()
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fetchNews()
-    }
-
-    func fetchNews () -> Void {
-        vkNewsService.loadNews { [weak self] result in
-            switch result {
-            case .success(let newsResponse):
-                self.view().newsTableView.news = newsResponse.items
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-
-    func view() -> NewsView {
-        return self.view as! NewsView
-    }
+    
+    
 }

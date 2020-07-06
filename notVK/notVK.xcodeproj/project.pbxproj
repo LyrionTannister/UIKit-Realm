@@ -371,12 +371,12 @@
 		84509F102461D55300E04BB3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				09997FD52432B1ED003891DA /* Assets.xcassets */,
 				09805C4A2441F4D500926BF9 /* Friends.storyboard */,
 				09805C46244063E300926BF9 /* Groups.storyboard */,
-				09997FCF2432B1E6003891DA /* MainScreen.storyboard */,
-				09805C422440631700926BF9 /* Main.storyboard */,
 				09997FD72432B1ED003891DA /* LaunchScreen.storyboard */,
-				09997FD52432B1ED003891DA /* Assets.xcassets */,
+				09805C422440631700926BF9 /* Main.storyboard */,
+				09997FCF2432B1E6003891DA /* MainScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
