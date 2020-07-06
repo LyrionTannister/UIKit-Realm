@@ -10,8 +10,8 @@ import UIKit
 
 class FriendsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var shadowLayer: ImageRoundedShadowed!
-    @IBOutlet weak var myFriendLabel: UILabel!
+    @IBOutlet private weak var shadowLayer: ImageRoundedShadowed!
+    @IBOutlet private weak var myFriendLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

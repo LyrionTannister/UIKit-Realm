@@ -10,7 +10,7 @@ import UIKit
 
 class FriendsCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var friendPhoto: UIImageView!
+    @IBOutlet private weak var friendPhoto: UIImageView!
         
     override func awakeFromNib() {
         super.awakeFromNib()

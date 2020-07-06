@@ -1,5 +1,5 @@
 //
-//  friendFactory.swift
+//  FriendItem.swift
 //  notVK
 //
 //  Created by Roman on 13.04.2020.
@@ -9,21 +9,14 @@
 import UIKit
 import RealmSwift
 
-class FriendResponse: Decodable {
-    var response: FriendList
-}
-
-class FriendList: Decodable {
-    var count: Int
-    var items: [FriendItem]
-}
-
 class FriendItem: Object, Decodable {
+    
     @objc dynamic var firstName: String = ""
     @objc dynamic var lastName: String = ""
     @objc dynamic var online: Int = 0
     @objc dynamic var photo100: String? = ""
     @objc dynamic var id: Int = 0
+    
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
         case lastName = "last_name"
@@ -31,5 +24,6 @@ class FriendItem: Object, Decodable {
         case photo100 = "photo_100"
         case id
     }
+    
 }
 

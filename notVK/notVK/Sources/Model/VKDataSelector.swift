@@ -15,9 +15,6 @@ class VKDataSelector {
     public static let shared = VKDataSelector()
     
     let baseUrl = "https://api.vk.com/method/"
-//    var baseParameters: String {
-//        return "?access_token=\(Session.shared.token)&extended=1&v=5.103"
-//    }
     
     enum Method {
         case getGroups

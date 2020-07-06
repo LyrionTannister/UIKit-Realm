@@ -9,13 +9,16 @@
 import UIKit
 
 class FriendsPhotosLayouts: UICollectionViewLayout {
+    
     var cacheAttributes = [IndexPath: UICollectionViewLayoutAttributes]()
     var columnsCount = 2
     var cellHeight: CGFloat = 128
     private var totalCellHeight: CGFloat = 0
 
     override func prepare() {
+        
         self.cacheAttributes = [:]
+        
         guard let collectionView = self.collectionView else { return }
         let itemsCount = collectionView.numberOfItems(inSection: 0)
         guard itemsCount > 0 else { return }
