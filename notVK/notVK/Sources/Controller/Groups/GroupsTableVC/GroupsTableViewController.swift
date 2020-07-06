@@ -24,7 +24,7 @@ class GroupsTableViewController: UITableViewController {
     }
     
     private func fetchGroups() {
-        VKRequestDelegate.loadGroups { result in switch result {
+        VKRequestService.loadGroups { result in switch result {
         case .success:
             self.fetchGroupsFromRealm()
         case .failure(let error):

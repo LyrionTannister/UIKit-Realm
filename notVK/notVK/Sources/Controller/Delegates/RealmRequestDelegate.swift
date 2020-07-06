@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 
 class RealmRequestDelegate {
+    
     static let shared = RealmRequestDelegate()
     
     private init() {}

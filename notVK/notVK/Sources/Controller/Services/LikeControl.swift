@@ -37,6 +37,7 @@ class LikeControl: UIControl {
         likeCounter = count
         setLikeCounterLabel()
     }
+    
     func setView() {
         
         self.addSubview(imageView)
@@ -47,6 +48,7 @@ class LikeControl: UIControl {
         
         setLikeCounterLabel()
     }
+    
     func setLikeCounterLabel(){
         addSubview(likeCountLabel)
         UIView.transition(with: likeCountLabel,
@@ -76,4 +78,5 @@ class LikeControl: UIControl {
             setLikeCounterLabel()
         }
     }
+    
 }

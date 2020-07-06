@@ -1,5 +1,5 @@
 //
-//  LoginWKView.swift
+//  LoginWKViewController.swift
 //  notVK
 //
 //  Created by Roman on 14.05.2020.
@@ -9,16 +9,16 @@
 import UIKit
 import WebKit
 
-class LoginWKView: UIViewController {
+class LoginWKViewController: UIViewController {
     
-    @IBOutlet weak var WKLoginView: WKWebView!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var WKLoginView: WKWebView!
+    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     
     let notificationCenter = NotificationCenter.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        WKLoginView.load(VKRequestDelegate.loginRequest())
+        WKLoginView.load(VKRequestService.loginRequest())
         WKLoginView.navigationDelegate = self
         
         let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
@@ -49,22 +49,22 @@ class LoginWKView: UIViewController {
         notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    @objc func keyboardWasShown(notification: Notification) {
+    @objc private func keyboardWasShown(notification: Notification) {
         let userInfo = (notification as NSNotification).userInfo as! [String: Any]
         let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         bottomConstraint.constant = frame.height
     }
 
-    @objc func keyboardWillBeHidden(notification: Notification) {
+    @objc private func keyboardWillBeHidden(notification: Notification) {
         bottomConstraint.constant = 0
     }
 
-    @objc func hideKeyboard() {
+    @objc private func hideKeyboard() {
         self.WKLoginView.endEditing(true)
     }
 }
 
-extension LoginWKView: WKNavigationDelegate {
+extension LoginWKViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         

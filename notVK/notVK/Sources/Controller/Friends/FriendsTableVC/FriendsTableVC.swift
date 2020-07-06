@@ -28,7 +28,7 @@ class FriendsTableViewController: UITableViewController {
     }
 
     private func fetchFriends() {
-        VKRequestDelegate.loadFriends { result in
+        VKRequestService.loadFriends { result in
             switch result {
             case .success:
                 self.fetchFriendsFromRealm()

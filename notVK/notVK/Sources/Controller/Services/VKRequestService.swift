@@ -1,5 +1,5 @@
 //
-//  VKRequestDelegate.swift
+//  VKRequestService.swift
 //  notVK
 //
 //  Created by Roman on 14.05.2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-class VKRequestDelegate {
+class VKRequestService {
+    
     static func loginRequest() -> URLRequest {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -75,6 +76,7 @@ class VKRequestDelegate {
     }
 
     static func loadFriendPhoto(friendId: String, completion: @escaping (Result<PhotoResponse, Error>) -> Void) {
+        
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
@@ -86,16 +88,20 @@ class VKRequestDelegate {
             URLQueryItem(name: "album_id", value: "profile"),
             URLQueryItem(name: "owner_id", value: friendId)
         ]
+        
         let request = URLRequest(url: urlComponents.url!)
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
+                
                 if let error = error {
                     print("some error")
                     completion(.failure(error))
                     return
                 }
+                
                 guard let data = data else { return }
+                
                 do {
                     let photo = try JSONDecoder().decode(PhotoResponse.self, from: data)
                     completion(.success(photo))
