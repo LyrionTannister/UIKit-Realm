@@ -40,8 +40,8 @@ class VKRequestService {
                 guard let data = data else { return }
                 do {
                     let group = try JSONDecoder().decode(GroupResponse.self, from: data)
-                    RealmRequestDelegate.shared.deleteObjects(GroupItem.self)
-                    RealmRequestDelegate.shared.commitObjects(group.response.items)
+                    RealmRequestService.shared.deleteObjects(GroupItem.self)
+                    RealmRequestService.shared.commitObjects(group.response.items)
                     completion(.success(group.response.items))
                 } catch let jsonError {
                     print("FAILED TO DECODE JSON", jsonError)
@@ -64,8 +64,8 @@ class VKRequestService {
                 guard let data = data else { return }
                 do {
                     let friend = try JSONDecoder().decode(FriendResponse.self, from: data)
-                    RealmRequestDelegate.shared.deleteObjects(FriendItem.self)
-                    RealmRequestDelegate.shared.commitObjects(friend.response.items)
+                    RealmRequestService.shared.deleteObjects(FriendItem.self)
+                    RealmRequestService.shared.commitObjects(friend.response.items)
                     completion(.success(friend.response.items))
                 } catch let jsonError {
                     print("FAILED TO DECODE JSON", jsonError)

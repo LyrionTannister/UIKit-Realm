@@ -9,6 +9,7 @@
 import UIKit
 
 final class CustomSwipeCloseTransition: UIPercentDrivenInteractiveTransition {
+    
     var viewController: UIViewController? {
         didSet {
             let recognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleScreenEdgeGesture(_:)))

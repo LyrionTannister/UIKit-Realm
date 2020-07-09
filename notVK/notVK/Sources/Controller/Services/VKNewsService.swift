@@ -34,8 +34,8 @@ class VKNewsService {
                 guard let data = data else { return }
                 do {
                     let news = try JSONDecoder().decode(NewsResponseNews.self, from: data)
-                    //RealmRequestDelegate.shared.deleteObjects(NewsItem.self)
-                    //RealmRequestDelegate.shared.commitObjects(news.response.items)
+                    //RealmRequestService.shared.deleteObjects(NewsItem.self)
+                    //RealmRequestService.shared.commitObjects(news.response.items)
                     completion(.success(news.response))
                 } catch let jsonError {
                     print("FAILED TO DECODE JSON", jsonError)

@@ -35,7 +35,7 @@ class GroupsTableViewController: UITableViewController {
     }
     
     private func fetchGroupsFromRealm() {
-        guard let groupsFromRealm = RealmRequestDelegate.shared.retrieveObjects(GroupItem.self) else { return }
+        guard let groupsFromRealm = RealmRequestService.shared.retrieveObjects(GroupItem.self) else { return }
         self.groupsContainer = groupsFromRealm
         self.configureRealmNotifications()
     }
