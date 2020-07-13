@@ -21,4 +21,12 @@ class FriendsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func configure(with friendName: String, friendPhotoURL: URL?) {
+        myFriendLabel.text = friendName
+        if let uFriendPhotoURL = friendPhotoURL {
+            let uFriendPhoto = UIImage(data: try! Data(contentsOf: uFriendPhotoURL as URL))
+            shadowLayer.image.image = uFriendPhoto
+        }
+    }
+    
 }

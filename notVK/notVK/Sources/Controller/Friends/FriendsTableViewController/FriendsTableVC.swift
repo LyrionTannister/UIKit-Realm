@@ -13,7 +13,7 @@ class FriendsTableViewController: UITableViewController {
 
     @IBOutlet private weak var searchTextField: UITextField!
 
-    var friendsContainer = [FriendItem]()
+    var friendsContainer: [FriendItem]?
     private var token: NotificationToken?
 
     override func viewDidLoad() {
@@ -80,21 +80,28 @@ class FriendsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friendsContainer.count
+        guard let uFriendsContainer = friendsContainer else { return 1 }
+        return uFriendsContainer.count
     }
 
     override func tableView(_ tableView: UITableView,
         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
-
-        let currentFriends = friendsContainer[indexPath.row]
-        cell.myFriendLabel.text = currentFriends.lastName + " " + currentFriends.firstName
+        let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as? FriendsTableViewCell
         
-        if let photoURL = URL(string: (currentFriends.photo100)!) {
-            cell.shadowLayer.image.image = UIImage(data: try! Data(contentsOf: photoURL as URL))
+        guard let uCell = cell, let uFriendsContainer = friendsContainer else {
+            print("There are some errors with reuse cell")
+            return UITableViewCell()
         }
-        return cell
+        
+
+        let currentFriend = uFriendsContainer[indexPath.row]
+        let fullName = currentFriend.lastName + " " + currentFriend.firstName
+
+        let uPhotoURL = URL(string: (currentFriend.photo100) ?? "")
+         
+        uCell.configure(with: fullName, friendPhotoURL: uPhotoURL)
+        return uCell
         
     }
 
@@ -113,7 +120,9 @@ class FriendsTableViewController: UITableViewController {
         
         var tempUsers: [FriendItem]?
         if let text = searchText?.lowercased(), searchText != "" {
-            tempUsers = friendsContainer.filter{ $0.lastName.lowercased().contains(text)}
+            if let uFriendsContainer = friendsContainer {
+                tempUsers = uFriendsContainer.filter{ $0.lastName.lowercased().contains(text)}
+            }
         } else {
             tempUsers = friendsContainer
         }
