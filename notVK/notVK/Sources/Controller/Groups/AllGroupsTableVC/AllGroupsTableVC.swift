@@ -10,7 +10,7 @@ import UIKit
 
 class AllGroupsTableViewController: UITableViewController {
 
-    var findedGroupsContainer = [GroupItem]()
+    var findedGroupsContainer: [GroupItem]?
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -18,14 +18,19 @@ class AllGroupsTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return findedGroupsContainer.count
+        guard let uFindedGroupsContainer = findedGroupsContainer else { return 1 }
+        
+        return uFindedGroupsContainer.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as! AllGroupsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as? AllGroupsTableViewCell
 
-        let group = findedGroupsContainer[indexPath.row]
-        cell.friendName.text = group.name
-        return cell
+        guard let uCell = cell, let uFindedGroupsContainer = findedGroupsContainer else {
+            return AllGroupsTableViewCell() }
+        
+        let currentGroup = uFindedGroupsContainer[indexPath.row]
+        uCell.configure(with: currentGroup.name)
+        return uCell
     }
 }

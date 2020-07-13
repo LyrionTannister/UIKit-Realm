@@ -14,8 +14,12 @@ class FriendsCollectionViewCell: UICollectionViewCell {
         
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-//        layer.borderColor = UIColor.black.cgColor
-//        layer.borderWidth = 0
     }
+    
+    func configure(with friendPhoto: UIImage?) {
+        if let uFriendPhoto = friendPhoto {
+            self.friendPhoto.image = uFriendPhoto
+        }
+    }
+    
 }

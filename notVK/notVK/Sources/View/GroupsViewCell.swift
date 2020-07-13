@@ -16,4 +16,13 @@ class GroupsViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    func configure(with groupName: String, groupPhotoURL: URL?) {
+        myGroupLabel.text = groupName
+        if let uGroupPhotoURL = groupPhotoURL {
+            let uGroupPhoto = UIImage(data: try! Data(contentsOf: uGroupPhotoURL as URL))
+            imageRoundedShadowed.image.image = uGroupPhoto
+        }
+    }
+    
 }

@@ -1,5 +1,5 @@
 //
-//  RealmRequestDelegate.swift
+//  RealmRequestService.swift
 //  notVK
 //
 //  Created by Roman on 26.05.2020.
@@ -9,8 +9,9 @@
 import Foundation
 import RealmSwift
 
-class RealmRequestDelegate {
-    static let shared = RealmRequestDelegate()
+class RealmRequestService {
+    
+    static let shared = RealmRequestService()
     
     private init() {}
     
@@ -47,4 +48,5 @@ class RealmRequestDelegate {
             print(error)
         }
     }
+    
 }

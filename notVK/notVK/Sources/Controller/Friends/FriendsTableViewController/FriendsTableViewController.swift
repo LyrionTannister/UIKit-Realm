@@ -11,9 +11,9 @@ import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
 
-    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet private weak var searchTextField: UITextField!
 
-    var friendsContainer = [FriendItem]()
+    var friendsContainer: [FriendItem]?
     private var token: NotificationToken?
 
     override func viewDidLoad() {
@@ -24,11 +24,12 @@ class FriendsTableViewController: UITableViewController {
         // MARK: - Table view properties
 
         self.clearsSelectionOnViewWillAppear = false
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
     }
 
     private func fetchFriends() {
-        VKRequestDelegate.loadFriends { result in
+        
+        VKRequestService.loadFriends { result in
             switch result {
             case .success:
                 self.fetchFriendsFromRealm()
@@ -37,15 +38,17 @@ class FriendsTableViewController: UITableViewController {
                 print(error)
             }
         }
+        
     }
 
     private func fetchFriendsFromRealm() {
-        guard let friendsFromRealm = RealmRequestDelegate.shared.retrieveObjects(FriendItem.self) else { return }
+        guard let friendsFromRealm = RealmRequestService.shared.retrieveObjects(FriendItem.self) else { return }
         self.friendsContainer = friendsFromRealm
             self.configureRealmNotifications()
         }
 
         private func configureRealmNotifications() {
+            
             guard let realm = try? Realm() else { return }
             token = realm.objects(FriendItem.self).observe({ [weak self] changes in
                 switch changes {
@@ -67,6 +70,7 @@ class FriendsTableViewController: UITableViewController {
                     fatalError(error.localizedDescription)
                 }
             })
+            
         }
 
     // MARK: - Table view data source
@@ -76,50 +80,49 @@ class FriendsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friendsContainer.count
+        guard let uFriendsContainer = friendsContainer else { return 1 }
+        return uFriendsContainer.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
-
-        let currentFriends = friendsContainer[indexPath.row]
-        cell.myFriendLabel.text = currentFriends.lastName + " " + currentFriends.firstName
+    override func tableView(_ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let photoURL = URL(string: (currentFriends.photo100)!) {
-            cell.shadowLayer.image.image = UIImage(data: try! Data(contentsOf: photoURL as URL))
+        let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as? FriendsTableViewCell
+        
+        guard let uCell = cell, let uFriendsContainer = friendsContainer else {
+            print("There are some errors with reuse cell")
+            return UITableViewCell()
         }
-        return cell
+        
+
+        let currentFriend = uFriendsContainer[indexPath.row]
+        let fullName = currentFriend.lastName + " " + currentFriend.firstName
+
+        let uPhotoURL = URL(string: (currentFriend.photo100) ?? "")
+         
+        uCell.configure(with: fullName, friendPhotoURL: uPhotoURL)
+        return uCell
+        
     }
-
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let viewForHeaderInSection = CustomSectionDesign()
-//        viewForHeaderInSection.label.text = String(firstLetters[section].uppercased())
-//        return viewForHeaderInSection
-//    }
-
-//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-//        return friendsSection.map {$0.title}
-//    }
-
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return friendsSection[section].title
-//    }
-
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "clickToDetail" {
             
             if let indexPath = tableView.indexPathForSelectedRow {
                 let imagesVC = segue.destination as! FriendsCollectionViewController
-                //imagesVC.friendsPhotos = friendsSection[indexPath.section].items[indexPath.row].photos
             }
         }
+        
     }
 
     func getSortedUsers(searchText: String?) -> [Character:[FriendItem]]?{
+        
         var tempUsers: [FriendItem]?
         if let text = searchText?.lowercased(), searchText != "" {
-            tempUsers = friendsContainer.filter{ $0.lastName.lowercased().contains(text)}
+            if let uFriendsContainer = friendsContainer {
+                tempUsers = uFriendsContainer.filter{ $0.lastName.lowercased().contains(text)}
+            }
         } else {
             tempUsers = friendsContainer
         }
@@ -129,16 +132,10 @@ class FriendsTableViewController: UITableViewController {
         } else {
             return nil
         }
+        
     }
-
-//    func sortedFriends(friends: [User]) {
-//        let sortedUsers = Dictionary.init(grouping: friends) {$0.lastName.lowercased().first!}
-//            .mapValues{ $0.sorted{$0.lastName.lowercased() < $1.lastName.lowercased() } }
-//
-//        friendsDictionary = sortedUsers
-//    }
     
-    @IBAction func cancelButtonPressed(_ sender: Any) {
+    @IBAction private func cancelButtonPressed(_ sender: Any) {
         self.view.layoutIfNeeded()
         UIView.animate(withDuration: 1,
                        delay: 0,
@@ -149,9 +146,24 @@ class FriendsTableViewController: UITableViewController {
                         self.searchTextField.alpha = 0
                         self.view.layoutIfNeeded()
         })
+        
         searchTextField.text = ""
-        //sortedFriends(friends: allMyFriends)
         searchTextField.endEditing(true)
         tableView.reloadData()
     }
+}
+
+extension FriendsTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        //TODO: Needed search realization
+
+        tableView.reloadData()
+              
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
 }

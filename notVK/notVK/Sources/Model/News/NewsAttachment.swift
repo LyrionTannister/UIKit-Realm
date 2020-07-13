@@ -12,8 +12,8 @@ class NewsAttachment: Decodable {
     
     var type: String? = ""
     var photo: PhotoItems?
-    var link: Link?
-    var video: Video?
+    var link: NewsLink?
+    var video: NewsVideo?
     
     enum CodingKeys: String, CodingKey {
         
@@ -31,8 +31,8 @@ class NewsAttachment: Decodable {
 
         type = try? container.decodeIfPresent(String.self, forKey: .type)
         photo = try? container.decodeIfPresent(PhotoItems.self, forKey: .photo)
-        link = try? container.decodeIfPresent(Link.self, forKey: .link)
-        video = try? container.decodeIfPresent(Video.self, forKey: .video)
+        link = try? container.decodeIfPresent(NewsLink.self, forKey: .link)
+        video = try? container.decodeIfPresent(NewsVideo.self, forKey: .video)
         
     }
     

@@ -10,7 +10,7 @@ import UIKit
 
 class FriendsCollectionViewController: UICollectionViewController {
 
-    var friendsPhotos = [String]()
+    var friendsPhotos: [String]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +25,20 @@ class FriendsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return friendsPhotos.count
+        guard let uFriendsPhotos = friendsPhotos else { return 1 }
+        return uFriendsPhotos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendPhotoCell", for: indexPath) as! FriendsCollectionViewCell
-        cell.friendPhoto.image = UIImage(named: friendsPhotos[indexPath.row])
-        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendPhotoCell", for: indexPath) as? FriendsCollectionViewCell
+        guard let uCell = cell, let uFriendPhotoImage = friendsPhotos else {
+            print("There are some errors with reuse cell")
+            return UICollectionViewCell()
+        }
+        
+        let friendPhotoImage = UIImage(named: uFriendPhotoImage[indexPath.row])
+        uCell.configure(with: friendPhotoImage)
+        return uCell
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
