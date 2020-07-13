@@ -16,4 +16,10 @@ class FriendsCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
+    func configure(with friendPhoto: UIImage?) {
+        if let uFriendPhoto = friendPhoto {
+            self.friendPhoto.image = uFriendPhoto
+        }
+    }
+    
 }
