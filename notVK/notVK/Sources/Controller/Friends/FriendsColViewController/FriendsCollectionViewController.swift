@@ -37,7 +37,7 @@ class FriendsCollectionViewController: UICollectionViewController {
         }
         
         let friendPhotoImage = UIImage(named: uFriendPhotoImage[indexPath.row])
-        uCell.configur
+        uCell.configure(with: friendPhotoImage)
         return uCell
     }
 

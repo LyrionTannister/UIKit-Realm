@@ -12,7 +12,7 @@
 		0924EF5B2451B5D2003EAB35 /* CustomSwipeCloseTrans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0924EF5A2451B5D2003EAB35 /* CustomSwipeCloseTrans.swift */; };
 		09372F1F24337F31009388FA /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09372F1E24337F31009388FA /* FriendsTableViewController.swift */; };
 		0944FF032435E4AE001918FB /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0944FF022435E4AE001918FB /* GroupsTableViewController.swift */; };
-		0944FF052435EA2C001918FB /* GroupsVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0944FF042435EA2C001918FB /* GroupsVCell.swift */; };
+		0944FF052435EA2C001918FB /* GroupsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0944FF042435EA2C001918FB /* GroupsViewCell.swift */; };
 		0944FF0A2435F0FE001918FB /* AllGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0944FF092435F0FE001918FB /* AllGroupsTableViewCell.swift */; };
 		0944FF0C2435F128001918FB /* AllGroupsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0944FF0B2435F128001918FB /* AllGroupsTableVC.swift */; };
 		0944FF122435FC93001918FB /* GroupItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0944FF112435FC93001918FB /* GroupItem.swift */; };
@@ -64,6 +64,7 @@
 		8481EBFF24A0F20200ABC2C0 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481EBFE24A0F20200ABC2C0 /* ImageService.swift */; };
 		8481EC0124A0F44E00ABC2C0 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481EC0024A0F44E00ABC2C0 /* LikeControl.swift */; };
 		8481EC0424A4905900ABC2C0 /* VKNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481EC0324A4905900ABC2C0 /* VKNewsService.swift */; };
+		8481EC0C24BC93A000ABC2C0 /* NewsScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8481EC0B24BC93A000ABC2C0 /* NewsScreen.storyboard */; };
 		84962F6D2461F4DB007F1232 /* CustomSectionDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84962F6C2461F4DB007F1232 /* CustomSectionDesign.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,7 +75,7 @@
 		0924EF5A2451B5D2003EAB35 /* CustomSwipeCloseTrans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwipeCloseTrans.swift; sourceTree = "<group>"; };
 		09372F1E24337F31009388FA /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		0944FF022435E4AE001918FB /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
-		0944FF042435EA2C001918FB /* GroupsVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsVCell.swift; sourceTree = "<group>"; };
+		0944FF042435EA2C001918FB /* GroupsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewCell.swift; sourceTree = "<group>"; };
 		0944FF092435F0FE001918FB /* AllGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		0944FF0B2435F128001918FB /* AllGroupsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableVC.swift; sourceTree = "<group>"; };
 		0944FF112435FC93001918FB /* GroupItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupItem.swift; sourceTree = "<group>"; };
@@ -127,7 +128,7 @@
 		8481EBFE24A0F20200ABC2C0 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		8481EC0024A0F44E00ABC2C0 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		8481EC0324A4905900ABC2C0 /* VKNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNewsService.swift; sourceTree = "<group>"; };
-		8481EC0524BC23AB00ABC2C0 /* NewsScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = NewsScreen.storyboard; path = Base.lproj/NewsScreen.storyboard; sourceTree = "<group>"; };
+		8481EC0B24BC93A000ABC2C0 /* NewsScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewsScreen.storyboard; sourceTree = "<group>"; };
 		84962F6C2461F4DB007F1232 /* CustomSectionDesign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSectionDesign.swift; sourceTree = "<group>"; };
 		B910C674E3B00F06541361DD /* Pods-notVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notVK.debug.xcconfig"; path = "Target Support Files/Pods-notVK/Pods-notVK.debug.xcconfig"; sourceTree = "<group>"; };
 		E39DCB62CE468E7C040C1C66 /* Pods_notVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -360,7 +361,7 @@
 				09997FD72432B1ED003891DA /* LaunchScreen.storyboard */,
 				09805C422440631700926BF9 /* Main.storyboard */,
 				09997FCF2432B1E6003891DA /* MainScreen.storyboard */,
-				8481EC0524BC23AB00ABC2C0 /* NewsScreen.storyboard */,
+				8481EC0B24BC93A000ABC2C0 /* NewsScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -418,7 +419,7 @@
 				09A879DE243A76FC00FF7C06 /* FindFriendsTableViewCell.swift */,
 				09EE39A72438237C00E5326B /* FriendsCollectionViewCell.swift */,
 				09A7D56824363098003B3881 /* FriendsTableViewCell.swift */,
-				0944FF042435EA2C001918FB /* GroupsVCell.swift */,
+				0944FF042435EA2C001918FB /* GroupsViewCell.swift */,
 				0912E365244CE34C001FEC20 /* Layouts */,
 				8481EBF924A0EF9C00ABC2C0 /* News */,
 				09EE39A02438138000E5326B /* UI */,
@@ -499,6 +500,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8481EC0C24BC93A000ABC2C0 /* NewsScreen.storyboard in Resources */,
 				09805C4B2441F4D500926BF9 /* Friends.storyboard in Resources */,
 				09805C47244063E300926BF9 /* Groups.storyboard in Resources */,
 				09997FD92432B1ED003891DA /* LaunchScreen.storyboard in Resources */,
@@ -600,7 +602,7 @@
 				841A924E24AB5178006DB312 /* NewsResponseNews.swift in Sources */,
 				0912E367244CE36C001FEC20 /* FriendsPhotosLayouts.swift in Sources */,
 				841A926524ADDFB0006DB312 /* GroupList.swift in Sources */,
-				0944FF052435EA2C001918FB /* GroupsVCell.swift in Sources */,
+				0944FF052435EA2C001918FB /* GroupsViewCell.swift in Sources */,
 				841A927B24B74B02006DB312 /* PhotoResponse.swift in Sources */,
 				841A927924B74AC2006DB312 /* PhotoList.swift in Sources */,
 				09805C522442194B00926BF9 /* ImageRoundedShadowed.swift in Sources */,

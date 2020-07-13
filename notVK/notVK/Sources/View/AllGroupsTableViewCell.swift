@@ -21,4 +21,7 @@ class AllGroupsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func configure(with groupName: String) {
+        self.friendName.text = groupName
+    }
 }

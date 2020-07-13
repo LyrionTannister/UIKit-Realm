@@ -11,7 +11,7 @@ import RealmSwift
 
 class GroupsTableViewController: UITableViewController {
 
-    var groupsContainer = [GroupItem]()
+    var groupsContainer: [GroupItem]?
     private var token: NotificationToken?
 
     override func viewDidLoad() {
@@ -71,20 +71,21 @@ class GroupsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupsContainer.count
+        guard let uGroupsContainer = groupsContainer else { return 1 }
+        return uGroupsContainer.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as! GroupsViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath) as? GroupsViewCell
 
-        let currentGroup = groupsContainer[indexPath.row]
+        guard let uCell = cell, let uGroupsContainer = groupsContainer else { return GroupsViewCell()}
         
-        cell.myGroupLabel.text = currentGroup.name
+        let currentGroup = uGroupsContainer[indexPath.row]
+                      
+        let uGroupPhotoURL = URL(string: (currentGroup.photo50) ?? "")
 
-        if let photoURL = URL(string: (currentGroup.photo50)!) {
-            cell.imageRoundedShadowed.image.image = UIImage(data: try! Data(contentsOf: photoURL as URL))
-        }
-        return cell
+        uCell.configure(with: currentGroup.name, groupPhotoURL: uGroupPhotoURL)
+        return uCell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
