@@ -53,6 +53,8 @@
 		841A927B24B74B02006DB312 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A927A24B74B02006DB312 /* PhotoResponse.swift */; };
 		8440DA7D24729A9200A72D9B /* PhotoItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440DA7C24729A9200A72D9B /* PhotoItems.swift */; };
 		8440DA7F247D2E8E00A72D9B /* RealmRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440DA7E247D2E8E00A72D9B /* RealmRequestService.swift */; };
+		84430D3E24C0691A00F6E293 /* GetDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84430D3D24C0691A00F6E293 /* GetDataRequest.swift */; };
+		84430D4024C06A4B00F6E293 /* GetDataRequestDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84430D3F24C06A4B00F6E293 /* GetDataRequestDelegate.swift */; };
 		845DAB5E246D6974003439FD /* LoginWKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DAB5D246D6974003439FD /* LoginWKViewController.swift */; };
 		845DAB60246D70D2003439FD /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DAB5F246D70D2003439FD /* Session.swift */; };
 		845DAB63246D74B7003439FD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 845DAB62246D74B7003439FD /* WebKit.framework */; };
@@ -119,6 +121,8 @@
 		841A927A24B74B02006DB312 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
 		8440DA7C24729A9200A72D9B /* PhotoItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItems.swift; sourceTree = "<group>"; };
 		8440DA7E247D2E8E00A72D9B /* RealmRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRequestService.swift; sourceTree = "<group>"; };
+		84430D3D24C0691A00F6E293 /* GetDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataRequest.swift; sourceTree = "<group>"; };
+		84430D3F24C06A4B00F6E293 /* GetDataRequestDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataRequestDelegate.swift; sourceTree = "<group>"; };
 		845DAB5D246D6974003439FD /* LoginWKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWKViewController.swift; sourceTree = "<group>"; };
 		845DAB5F246D70D2003439FD /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		845DAB62246D74B7003439FD /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -346,6 +350,15 @@
 			path = Photo;
 			sourceTree = "<group>";
 		};
+		84430D3C24C068F600F6E293 /* URLSession shared */ = {
+			isa = PBXGroup;
+			children = (
+				84430D3D24C0691A00F6E293 /* GetDataRequest.swift */,
+				84430D3F24C06A4B00F6E293 /* GetDataRequestDelegate.swift */,
+			);
+			path = "URLSession shared";
+			sourceTree = "<group>";
+		};
 		84509F0F2461D50F00E04BB3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +456,7 @@
 		84962F6F2461F8BF007F1232 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				84430D3C24C068F600F6E293 /* URLSession shared */,
 				8481EC0D24BC94B900ABC2C0 /* OperationsSharedClasses */,
 				09EDD034243967CF00B8DAF6 /* Delegates */,
 				0944FF142435FCFB001918FB /* Friends */,
@@ -588,6 +602,7 @@
 				845DAB65246D7661003439FD /* VKRequestService.swift in Sources */,
 				8481EBF424A0DB4500ABC2C0 /* NewsItems.swift in Sources */,
 				8481EC0F24BC94E100ABC2C0 /* AsyncOperation.swift in Sources */,
+				84430D4024C06A4B00F6E293 /* GetDataRequestDelegate.swift in Sources */,
 				09A879DF243A76FC00FF7C06 /* FindFriendsTableViewCell.swift in Sources */,
 				09EE39A82438237D00E5326B /* FriendsCollectionViewCell.swift in Sources */,
 				09A879DD243A6CF900FF7C06 /* FindFriendsTableVC.swift in Sources */,
@@ -623,6 +638,7 @@
 				841A927924B74AC2006DB312 /* PhotoList.swift in Sources */,
 				09805C522442194B00926BF9 /* ImageRoundedShadowed.swift in Sources */,
 				0944FF032435E4AE001918FB /* GroupsTableViewController.swift in Sources */,
+				84430D3E24C0691A00F6E293 /* GetDataRequest.swift in Sources */,
 				845DAB67246D78E4003439FD /* VKDataSelector.swift in Sources */,
 				0944FF0A2435F0FE001918FB /* AllGroupsTableViewCell.swift in Sources */,
 			);
