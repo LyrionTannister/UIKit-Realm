@@ -8,27 +8,39 @@
 
 import UIKit
 
-//let downloader: GetDataRequest = {
-// let config = URLSessionConfiguration.default
-//    config.timeoutIntervalForRequest = 30
-// return GetDataRequest(configuration: config)
-//}()
-//
-//let s = "https://www.someserver.com/somefolder/someimage.jpg"
-//let url = URL(string:s)!
-//let req = URLRequest(url: url)
-//downloader.getData(urlRequest: req) { data in
-//    if let d = data {
-//        let im = UIImage(data: d)
-//        print(im) // assume we're called back on main thread
-//    }
-//}
+func getMyFriends() {
+    
+    let downloader: GetDataRequest = {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 30
+        return GetDataRequest(configuration: config)
+    }()
+    
+    var urlComponents = URLComponents()
+    urlComponents.scheme = VKDataSelector.shared.scheme
+    urlComponents.host = VKDataSelector.shared.host
+    urlComponents.path = VKDataSelector.Method.getFriends.methodName
+    urlComponents.queryItems = [
+        URLQueryItem(name: "access_token", value: "\(Session.shared.token)"),
+        URLQueryItem(name: "extended", value: "1"),
+        URLQueryItem(name: "fields", value: "photo_100"),
+        URLQueryItem(name: "v", value: "5.103")
+    ]
+    let getFriendsReqest = URLRequest(url: urlComponents.url!)
+    
+    downloader.getData(urlRequest: getFriendsReqest) { data in
+        if let d = data {
+            let im = Data(base64Encoded: d)
+            print(im) // assume we're called back on main thread
+        }
+    }
+}
 
 class GetDataRequest: NSObject {
     
-    typealias DownloaderCH = (URLRequest?) -> ()
+    typealias GetDataCH = (Data?) -> ()
     
-    var data = [Int:Data]()
+    //var data = [Int:Data]()
     let config: URLSessionConfiguration
     
     lazy var session: URLSession = {
@@ -44,7 +56,7 @@ class GetDataRequest: NSObject {
     
     @discardableResult
     func getData(urlRequest: URLRequest,
-                 completionHandler ch : @escaping DownloaderCH) -> URLSessionTask {
+                 completionHandler ch : @escaping GetDataCH) -> URLSessionTask {
         
         let task = self.session.dataTask(with: urlRequest)
         let delegate = self.session.delegate as! GetDataRequestDelegate

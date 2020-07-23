@@ -27,14 +27,25 @@ class VKRequestService {
         return request
     }
 
-    static func loadGroups(completion: @escaping (Result<[GroupItem], Error>) -> Void ) {
-        let urlString = VKDataSelector.shared.baseUrl + VKDataSelector.Method.getGroups.methodName + "?access_token=\(Session.shared.token)&extended=1&v=5.103"
-        guard let url = URL(string: urlString) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+    static func loadGroups(ch: @escaping (Result<[GroupItem], Error>) -> Void ) {
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = VKDataSelector.shared.scheme
+        urlComponents.host = VKDataSelector.shared.host
+        urlComponents.path = VKDataSelector.Method.getGroups.methodName
+        urlComponents.queryItems = [
+            URLQueryItem(name: "access_token", value: "\(Session.shared.token)"),
+            URLQueryItem(name: "extended", value: "1"),
+            URLQueryItem(name: "v", value: "5.103")
+        ]
+        let getGroupsReqest = URLRequest(url: urlComponents.url!)
+        
+        //OLD METHOD
+        URLSession.shared.dataTask(with: getGroupsReqest) { (data, response, error) in
             DispatchQueue.main.async {
                 if let error = error {
                     print("some error")
-                    completion(.failure(error))
+                    ch(.failure(error))
                     return
                 }
                 guard let data = data else { return }
@@ -42,19 +53,31 @@ class VKRequestService {
                     let group = try JSONDecoder().decode(GroupResponse.self, from: data)
                     RealmRequestService.shared.deleteObjects(GroupItem.self)
                     RealmRequestService.shared.commitObjects(group.response.items)
-                    completion(.success(group.response.items))
+                    ch(.success(group.response.items))
                 } catch let jsonError {
                     print("FAILED TO DECODE JSON", jsonError)
-                    completion(.failure(jsonError))
+                    ch(.failure(jsonError))
                 }
             }
         }.resume()
     }
 
     static func loadFriends(completion: @escaping (Result<[FriendItem], Error>) -> Void) {
-        let urlString = VKDataSelector.shared.baseUrl + VKDataSelector.Method.getFriends.methodName + "?access_token=\(Session.shared.token)&extended=1&v=5.103&fields=photo_100"
-        guard let url = URL(string: urlString) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = VKDataSelector.shared.scheme
+        urlComponents.host = VKDataSelector.shared.host
+        urlComponents.path = VKDataSelector.Method.getFriends.methodName
+        urlComponents.queryItems = [
+            URLQueryItem(name: "access_token", value: "\(Session.shared.token)"),
+            URLQueryItem(name: "extended", value: "1"),
+            URLQueryItem(name: "fields", value: "photo_100"),
+            URLQueryItem(name: "v", value: "5.103")
+        ]
+        let getFriendsReqest = URLRequest(url: urlComponents.url!)
+        
+        //OLD REQUEST
+        URLSession.shared.dataTask(with: getFriendsReqest) { (data, response, error) in
             DispatchQueue.main.async {
                 if let error = error {
                     print("some error")
@@ -78,9 +101,9 @@ class VKRequestService {
     static func loadFriendPhoto(friendId: String, completion: @escaping (Result<PhotoResponse, Error>) -> Void) {
         
         var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/photos.get"
+        urlComponents.scheme = VKDataSelector.shared.scheme
+        urlComponents.host = VKDataSelector.shared.host
+        urlComponents.path = VKDataSelector.Method.getPhotos.methodName
         urlComponents.queryItems = [
             URLQueryItem(name: "access_token", value: "\(Session.shared.token)"),
             URLQueryItem(name: "extended", value: "1"),
@@ -89,9 +112,9 @@ class VKRequestService {
             URLQueryItem(name: "owner_id", value: friendId)
         ]
         
-        let request = URLRequest(url: urlComponents.url!)
+        let getPhotoRequest = URLRequest(url: urlComponents.url!)
         
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
+        URLSession.shared.dataTask(with: getPhotoRequest) { (data, response, error) in
             DispatchQueue.main.async {
                 
                 if let error = error {
