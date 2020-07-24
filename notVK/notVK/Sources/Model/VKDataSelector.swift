@@ -16,6 +16,7 @@ class VKDataSelector {
     
     let scheme = "https"
     let host = "api.vk.com"
+    let apiVersion = "5.103"
     
     enum Method {
         case getGroups

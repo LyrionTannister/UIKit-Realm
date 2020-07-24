@@ -36,7 +36,7 @@ class VKRequestService {
         urlComponents.queryItems = [
             URLQueryItem(name: "access_token", value: "\(Session.shared.token)"),
             URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "v", value: "5.103")
+            URLQueryItem(name: "v", value: VKDataSelector.shared.apiVersion)
         ]
         let getGroupsReqest = URLRequest(url: urlComponents.url!)
         
