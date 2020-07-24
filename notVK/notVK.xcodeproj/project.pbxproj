@@ -44,10 +44,6 @@
 		841A925E24AB533E006DB312 /* NewsRepostsNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A925D24AB533E006DB312 /* NewsRepostsNews.swift */; };
 		841A926024AB534D006DB312 /* NewsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A925F24AB534D006DB312 /* NewsViews.swift */; };
 		841A926224AB535B006DB312 /* NewsOnlineInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A926124AB535B006DB312 /* NewsOnlineInfo.swift */; };
-		841A926524ADDFB0006DB312 /* GroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A926424ADDFB0006DB312 /* GroupList.swift */; };
-		841A926724ADE010006DB312 /* GroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A926624ADE010006DB312 /* GroupResponse.swift */; };
-		841A926A24AF1CBA006DB312 /* FriendResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A926924AF1CBA006DB312 /* FriendResponse.swift */; };
-		841A926C24AF1CE3006DB312 /* FriendList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A926B24AF1CE3006DB312 /* FriendList.swift */; };
 		841A927724B74A9F006DB312 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A927624B74A9F006DB312 /* Sizes.swift */; };
 		841A927924B74AC2006DB312 /* PhotoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A927824B74AC2006DB312 /* PhotoList.swift */; };
 		841A927B24B74B02006DB312 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A927A24B74B02006DB312 /* PhotoResponse.swift */; };
@@ -59,6 +55,8 @@
 		84430D8D24CB6E8600F6E293 /* ParseDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84430D8C24CB6E8600F6E293 /* ParseDataOperation.swift */; };
 		84430D8F24CB6FB700F6E293 /* VKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84430D8E24CB6FB700F6E293 /* VKResponse.swift */; };
 		84430D9224CB700800F6E293 /* VKItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84430D9124CB700800F6E293 /* VKItems.swift */; };
+		84430D9424CB722A00F6E293 /* SaveDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84430D9324CB722A00F6E293 /* SaveDataOperation.swift */; };
+		84430D9624CB73FA00F6E293 /* RealmOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84430D9524CB73FA00F6E293 /* RealmOperations.swift */; };
 		845DAB5E246D6974003439FD /* LoginWKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DAB5D246D6974003439FD /* LoginWKViewController.swift */; };
 		845DAB60246D70D2003439FD /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DAB5F246D70D2003439FD /* Session.swift */; };
 		845DAB63246D74B7003439FD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 845DAB62246D74B7003439FD /* WebKit.framework */; };
@@ -116,10 +114,6 @@
 		841A925D24AB533E006DB312 /* NewsRepostsNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRepostsNews.swift; sourceTree = "<group>"; };
 		841A925F24AB534D006DB312 /* NewsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViews.swift; sourceTree = "<group>"; };
 		841A926124AB535B006DB312 /* NewsOnlineInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsOnlineInfo.swift; sourceTree = "<group>"; };
-		841A926424ADDFB0006DB312 /* GroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupList.swift; sourceTree = "<group>"; };
-		841A926624ADE010006DB312 /* GroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResponse.swift; sourceTree = "<group>"; };
-		841A926924AF1CBA006DB312 /* FriendResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendResponse.swift; sourceTree = "<group>"; };
-		841A926B24AF1CE3006DB312 /* FriendList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendList.swift; sourceTree = "<group>"; };
 		841A927624B74A9F006DB312 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		841A927824B74AC2006DB312 /* PhotoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoList.swift; sourceTree = "<group>"; };
 		841A927A24B74B02006DB312 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
@@ -131,6 +125,8 @@
 		84430D8C24CB6E8600F6E293 /* ParseDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseDataOperation.swift; sourceTree = "<group>"; };
 		84430D8E24CB6FB700F6E293 /* VKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKResponse.swift; sourceTree = "<group>"; };
 		84430D9124CB700800F6E293 /* VKItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKItems.swift; sourceTree = "<group>"; };
+		84430D9324CB722A00F6E293 /* SaveDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDataOperation.swift; sourceTree = "<group>"; };
+		84430D9524CB73FA00F6E293 /* RealmOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmOperations.swift; sourceTree = "<group>"; };
 		845DAB5D246D6974003439FD /* LoginWKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWKViewController.swift; sourceTree = "<group>"; };
 		845DAB5F246D70D2003439FD /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		845DAB62246D74B7003439FD /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -287,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				09997FC92432B1E6003891DA /* AppDelegate.swift */,
-				8440DA7E247D2E8E00A72D9B /* RealmRequestService.swift */,
 				09997FCB2432B1E6003891DA /* SceneDelegate.swift */,
 			);
 			path = Delegates;
@@ -336,8 +331,6 @@
 			isa = PBXGroup;
 			children = (
 				0944FF112435FC93001918FB /* GroupItem.swift */,
-				841A926424ADDFB0006DB312 /* GroupList.swift */,
-				841A926624ADE010006DB312 /* GroupResponse.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -345,7 +338,7 @@
 		841A926824AF1C9B006DB312 /* Friend */ = {
 			isa = PBXGroup;
 			children = (
-				8481EC0624BC27E300ABC2C0 /* FriendObject */,
+				094D5383244498D500387523 /* FriendItem.swift */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
@@ -430,26 +423,18 @@
 		8481EC0224A48FF800ABC2C0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8481EC0D24BC94B900ABC2C0 /* OperationsSharedClasses */,
-				84430D3C24C068F600F6E293 /* URLSession shared */,
 				8481EBF524A0E86500ABC2C0 /* DateFormatter.swift */,
 				8481EBFE24A0F20200ABC2C0 /* ImageService.swift */,
 				8481EC0024A0F44E00ABC2C0 /* LikeControl.swift */,
+				8481EC0D24BC94B900ABC2C0 /* OperationsSharedClasses */,
+				84430D9524CB73FA00F6E293 /* RealmOperations.swift */,
+				8440DA7E247D2E8E00A72D9B /* RealmRequestService.swift */,
+				84430D3C24C068F600F6E293 /* URLSession shared */,
 				8481EC0324A4905900ABC2C0 /* VKNewsService.swift */,
 				845DAB64246D7661003439FD /* VKRequestService.swift */,
 			);
 			name = Services;
 			path = ../Controller/Services;
-			sourceTree = "<group>";
-		};
-		8481EC0624BC27E300ABC2C0 /* FriendObject */ = {
-			isa = PBXGroup;
-			children = (
-				094D5383244498D500387523 /* FriendItem.swift */,
-				841A926B24AF1CE3006DB312 /* FriendList.swift */,
-				841A926924AF1CBA006DB312 /* FriendResponse.swift */,
-			);
-			path = FriendObject;
 			sourceTree = "<group>";
 		};
 		8481EC0D24BC94B900ABC2C0 /* OperationsSharedClasses */ = {
@@ -458,6 +443,7 @@
 				8481EC0E24BC94E100ABC2C0 /* AsyncOperation.swift */,
 				8481EC1024BC97EF00ABC2C0 /* GetDataOperation.swift */,
 				84430D8C24CB6E8600F6E293 /* ParseDataOperation.swift */,
+				84430D9324CB722A00F6E293 /* SaveDataOperation.swift */,
 			);
 			path = OperationsSharedClasses;
 			sourceTree = "<group>";
@@ -617,13 +603,13 @@
 				841A926224AB535B006DB312 /* NewsOnlineInfo.swift in Sources */,
 				841A925624AB51C3006DB312 /* NewsVideo.swift in Sources */,
 				841A925E24AB533E006DB312 /* NewsRepostsNews.swift in Sources */,
-				841A926724ADE010006DB312 /* GroupResponse.swift in Sources */,
 				09997FD42432B1E6003891DA /* notVK.xcdatamodeld in Sources */,
-				841A926C24AF1CE3006DB312 /* FriendList.swift in Sources */,
 				845DAB65246D7661003439FD /* VKRequestService.swift in Sources */,
 				8481EBF424A0DB4500ABC2C0 /* NewsItems.swift in Sources */,
 				8481EC0F24BC94E100ABC2C0 /* AsyncOperation.swift in Sources */,
 				84430D4024C06A4B00F6E293 /* GetDataRequestDelegate.swift in Sources */,
+				84430D9424CB722A00F6E293 /* SaveDataOperation.swift in Sources */,
+				84430D9624CB73FA00F6E293 /* RealmOperations.swift in Sources */,
 				09A879DF243A76FC00FF7C06 /* FindFriendsTableViewCell.swift in Sources */,
 				09EE39A82438237D00E5326B /* FriendsCollectionViewCell.swift in Sources */,
 				09A879DD243A6CF900FF7C06 /* FindFriendsTableVC.swift in Sources */,
@@ -639,7 +625,6 @@
 				841A925224AB51A6006DB312 /* NewsAttachment.swift in Sources */,
 				094D5384244498D500387523 /* FriendItem.swift in Sources */,
 				09A7D56924363098003B3881 /* FriendsTableViewCell.swift in Sources */,
-				841A926A24AF1CBA006DB312 /* FriendResponse.swift in Sources */,
 				84962F6D2461F4DB007F1232 /* CustomSectionDesign.swift in Sources */,
 				09997FCA2432B1E6003891DA /* AppDelegate.swift in Sources */,
 				841A927724B74A9F006DB312 /* Sizes.swift in Sources */,
@@ -656,7 +641,6 @@
 				0944FF0C2435F128001918FB /* AllGroupsTableVC.swift in Sources */,
 				841A924E24AB5178006DB312 /* NewsResponseNews.swift in Sources */,
 				0912E367244CE36C001FEC20 /* FriendsPhotosLayouts.swift in Sources */,
-				841A926524ADDFB0006DB312 /* GroupList.swift in Sources */,
 				0944FF052435EA2C001918FB /* GroupsViewCell.swift in Sources */,
 				841A927B24B74B02006DB312 /* PhotoResponse.swift in Sources */,
 				84430D8D24CB6E8600F6E293 /* ParseDataOperation.swift in Sources */,

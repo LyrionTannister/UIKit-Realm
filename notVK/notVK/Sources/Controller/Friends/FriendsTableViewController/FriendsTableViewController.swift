@@ -19,33 +19,10 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchFriends()
-
-        // MARK: - Table view properties
-
         self.clearsSelectionOnViewWillAppear = false
         
+        RealmOperations.shared.fetchFriendsFromRealm()
     }
-
-    private func fetchFriends() {
-
-        VKRequestService.loadFriends { result in
-            switch result {
-            case .success:
-                self.fetchFriendsFromRealm()
-            case .failure(let error):
-                self.fetchFriendsFromRealm()
-                print(error)
-            }
-        }
-
-    }
-
-    private func fetchFriendsFromRealm() {
-        guard let friendsFromRealm = RealmRequestService.shared.retrieveObjects(FriendItem.self) else { return }
-        self.friendsContainer = friendsFromRealm
-            self.configureRealmNotifications()
-        }
 
     private func configureRealmNotifications() {
         

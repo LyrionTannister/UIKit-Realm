@@ -9,20 +9,26 @@
 import UIKit
 import RealmSwift
 
-class FriendItem: Object, Decodable {
+class FriendItem: Object, Codable {
     
     @objc dynamic var firstName: String = ""
     @objc dynamic var lastName: String = ""
-    @objc dynamic var online: Int = 0
-    @objc dynamic var photo100: String? = ""
+    @objc dynamic var friendPhoto100: String? = ""
     @objc dynamic var id: Int = 0
     
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
         case lastName = "last_name"
-        case online
-        case photo100 = "photo_100"
+        case friendPhoto100 = "photo_100"
         case id
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    override static func indexedProperties() -> [String] {
+        return ["firstName", "lastName"]
     }
     
 }
