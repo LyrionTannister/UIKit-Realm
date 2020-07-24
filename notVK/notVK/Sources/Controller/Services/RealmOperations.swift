@@ -17,7 +17,8 @@ class RealmOperations {
     
     //MARK: Friends Operation Chain
     func fetchFriendsFromRealm(){
-        let urlRequest = URLStorage.shared.getURLDataCommunites()
+        
+        let urlRequest = URLStorage.shared.getURLforFriends()
         
         let getDataOperation = GetDataOperation(urlRequest: urlRequest!)
         queue.addOperation(getDataOperation)
@@ -29,6 +30,7 @@ class RealmOperations {
         let saveDataOperation = SaveDataOperation<FriendItem>()
         saveDataOperation.addDependency(parseDataOperation)
         queue.addOperation(saveDataOperation)
+        
     }
     
 }

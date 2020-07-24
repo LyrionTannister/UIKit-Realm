@@ -14,39 +14,14 @@ class FriendsTableViewController: UITableViewController {
     @IBOutlet private weak var searchTextField: UITextField!
 
     var friendsContainer: [FriendItem]?
-    private var token: NotificationToken?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.clearsSelectionOnViewWillAppear = false
         
         RealmOperations.shared.fetchFriendsFromRealm()
-    }
-
-    private func configureRealmNotifications() {
-        
-        guard let realm = try? Realm() else { return }
-        token = realm.objects(FriendItem.self).observe({ [weak self] changes in
-            switch changes {
-            case .initial:
-                self?.tableView.reloadData()
-            case .update(_,
-                         deletions: let deletions,
-                         insertions: let insertions,
-                         modifications: let modifications):
-                self?.tableView.beginUpdates()
-                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
-                                           with: .automatic)
-                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
-                                           with: .automatic)
-                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
-                                           with: .automatic)
-                self?.tableView.endUpdates()
-            case .error(let error):
-                fatalError(error.localizedDescription)
-            }
-        })
+        TableUpdateService.shared.configureFriendRealmNotifications(forTable: self.tableView)
         
     }
 
@@ -75,7 +50,7 @@ class FriendsTableViewController: UITableViewController {
         let currentFriend = uFriendsContainer[indexPath.row]
         let fullName = currentFriend.lastName + " " + currentFriend.firstName
 
-        let uPhotoURL = URL(string: (currentFriend.photo100) ?? "")
+        let uPhotoURL = URL(string: (currentFriend.friendPhoto100) ?? "")
          
         uCell.configure(with: fullName, friendPhotoURL: uPhotoURL)
         return uCell

@@ -15,7 +15,25 @@ class URLStorage {
     
     private init() {}
     
-    func getURLDataCommunites() -> URLRequest? {
+    func getURLForGroups() -> URLRequest? {
+        
+        urlConstructor.scheme = VKDataSelector.shared.scheme
+        urlConstructor.host = VKDataSelector.shared.host
+        urlConstructor.path = VKDataSelector.Method.getGroups.methodName
+        
+        urlConstructor.queryItems = [
+            URLQueryItem(name: "extended", value: "1"),
+            URLQueryItem(name: "fields", value: "description"),
+            URLQueryItem(name: "access_token", value: Session.shared.token),
+            URLQueryItem(name: "v", value: VKDataSelector.shared.apiVersion),
+        ]
+        return URLRequest(url: urlConstructor.url!)
+    }
+    
+    func getURLforFriends() -> URLRequest? {
+        
+        urlConstructor.scheme = VKDataSelector.shared.scheme
+        urlConstructor.host = VKDataSelector.shared.host
         urlConstructor.path = VKDataSelector.Method.getFriends.methodName
         
         urlConstructor.queryItems = [
