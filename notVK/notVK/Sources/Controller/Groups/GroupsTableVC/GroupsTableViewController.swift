@@ -16,7 +16,7 @@ class GroupsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         fetchGroups()
         
         // MARK: - Table view properties

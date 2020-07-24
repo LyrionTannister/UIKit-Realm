@@ -76,6 +76,26 @@ class VKRequestService {
         ]
         let getFriendsReqest = URLRequest(url: urlComponents.url!)
         
+        //NEW REQUEST WITH GetDataRequest CLASS
+//        let downloader: GetDataRequest = {
+//            let config = URLSessionConfiguration.default
+//            config.timeoutIntervalForRequest = 30
+//            return GetDataRequest(configuration: config)
+//        }()
+//
+//        downloader.getData(urlRequest: getFriendsReqest) { data in
+//            guard let data = data else { return }
+//            do {
+//                let friend = try JSONDecoder().decode(FriendResponse.self, from: data)
+//                RealmRequestService.shared.deleteObjects(FriendItem.self)
+//                RealmRequestService.shared.commitObjects(friend.response.items)
+//                completion(.success(friend.response.items))
+//            } catch let jsonError {
+//                print("FAILED TO DECODE JSON", jsonError)
+//                completion(.failure(jsonError))
+//            }
+//        }
+
         //OLD REQUEST
         URLSession.shared.dataTask(with: getFriendsReqest) { (data, response, error) in
             DispatchQueue.main.async {

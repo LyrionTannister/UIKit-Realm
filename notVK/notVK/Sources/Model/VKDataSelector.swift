@@ -16,12 +16,6 @@ class VKDataSelector {
     
     let scheme = "https"
     let host = "api.vk.com"
-    let queryItems = ["?access_token=\(Session.shared.token)&extended=1&v=5.103"
-        
-        URLQueryItem(name: "v", value: "5.103")
-    ]
-    
-    //let baseUrl = "https://api.vk.com/method/"
     
     enum Method {
         case getGroups
