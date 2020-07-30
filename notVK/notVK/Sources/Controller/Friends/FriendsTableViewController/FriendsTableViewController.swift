@@ -13,7 +13,8 @@ class FriendsTableViewController: UITableViewController {
 
     @IBOutlet private weak var searchTextField: UITextField!
 
-    var friendsContainer: [FriendItem]?
+    private var friendsContainer: [FriendItem]?
+    private var token: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,7 @@ class FriendsTableViewController: UITableViewController {
         self.clearsSelectionOnViewWillAppear = false
         
         RealmOperations.shared.fetchFriendsFromRealm()
-        TableUpdateService.shared.configureFriendRealmNotifications(forTable: self.tableView)
+        fetchFriendsFromRealm()
         
     }
 
@@ -46,7 +47,6 @@ class FriendsTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
-
         let currentFriend = uFriendsContainer[indexPath.row]
         let fullName = currentFriend.lastName + " " + currentFriend.firstName
 
@@ -87,35 +87,44 @@ class FriendsTableViewController: UITableViewController {
         
     }
     
-    @IBAction private func cancelButtonPressed(_ sender: Any) {
-        self.view.layoutIfNeeded()
-        UIView.animate(withDuration: 1,
-                       delay: 0,
-                       usingSpringWithDamping: 0.5,
-                       initialSpringVelocity: 0.3,
-                       options: [],
-                       animations: {
-                        self.searchTextField.alpha = 0
-                        self.view.layoutIfNeeded()
-        })
-        
-        searchTextField.text = ""
-        searchTextField.endEditing(true)
-        tableView.reloadData()
-    }
 }
 
-extension FriendsTableViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+extension FriendsTableViewController {
+    
+    //MARK: fetchFriendsFromRealm
+    private func fetchFriendsFromRealm() {
         
-        //TODO: Needed search realization
-
-        tableView.reloadData()
-              
+        guard let friendsFromRealm = RealmRequestService.shared.retrieveObjects(FriendItem.self) else { return }
+        self.friendsContainer = friendsFromRealm
+        self.configureFriendRealmNotifications()
+        
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(true)
+    //MARK: configureFriendRealmNotifications
+    private func configureFriendRealmNotifications() {
+        
+        guard let realm = try? Realm() else { return }
+        token = realm.objects(FriendItem.self).observe({ changes in
+            switch changes {
+            case .initial:
+                self.tableView.reloadData()
+            case .update(_,
+                         deletions: let deletions,
+                         insertions: let insertions,
+                         modifications: let modifications):
+                self.tableView.beginUpdates()
+                self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                  with: .automatic)
+                self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                  with: .automatic)
+                self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                  with: .automatic)
+                self.tableView.endUpdates()
+            case .error(let error):
+                fatalError(error.localizedDescription)
+            }
+        })
+        
     }
     
 }
