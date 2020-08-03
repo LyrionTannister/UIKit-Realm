@@ -6,6 +6,8 @@ target 'notVK' do
   use_frameworks!
   pod 'Realm', '~>5.0.0',:modular_headers => true
   pod 'RealmSwift', '~> 5.0.0', :modular_headers => true
+  pod 'PromiseKit',  '~> 6.0'
+  pod 'Texture'
   # Pods for notVK
 
 end

@@ -21,8 +21,8 @@ class FriendsTableViewController: UITableViewController {
         
         self.clearsSelectionOnViewWillAppear = false
         
-        RealmOperations.shared.fetchFriendsFromRealm()
-        fetchFriendsFromRealm()
+//        RealmOperations.shared.fetchFriendsFromRealm()
+//        loadFriendsFromRealm()
         
     }
 
@@ -33,7 +33,7 @@ class FriendsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let uFriendsContainer = friendsContainer else { return 1 }
+        guard let uFriendsContainer = friendsContainer else { return 0 }
         return uFriendsContainer.count
     }
 
@@ -67,36 +67,17 @@ class FriendsTableViewController: UITableViewController {
         }
         
     }
-
-    func getSortedUsers(searchText: String?) -> [Character:[FriendItem]]?{
-        
-        var tempUsers: [FriendItem]?
-        if let text = searchText?.lowercased(), searchText != "" {
-            if let uFriendsContainer = friendsContainer {
-                tempUsers = uFriendsContainer.filter{ $0.lastName.lowercased().contains(text)}
-            }
-        } else {
-            tempUsers = friendsContainer
-        }
-        if let isUsersExists = tempUsers {
-            let sortedUsers = Dictionary.init(grouping: isUsersExists) { $0.lastName.lowercased().first! }.mapValues{ $0.sorted{ $0.lastName.lowercased() < $1.lastName.lowercased() } }
-            return sortedUsers
-        } else {
-            return nil
-        }
-        
-    }
     
 }
 
 extension FriendsTableViewController {
     
-    //MARK: fetchFriendsFromRealm
-    private func fetchFriendsFromRealm() {
+    //MARK: loadFriendsFromRealm
+    private func loadFriendsFromRealm() {
         
         guard let friendsFromRealm = RealmRequestService.shared.retrieveObjects(FriendItem.self) else { return }
         self.friendsContainer = friendsFromRealm
-        self.configureFriendRealmNotifications()
+        //self.configureFriendRealmNotifications()
         
     }
     
@@ -104,22 +85,23 @@ extension FriendsTableViewController {
     private func configureFriendRealmNotifications() {
         
         guard let realm = try? Realm() else { return }
-        token = realm.objects(FriendItem.self).observe({ changes in
+        self.token = realm.objects(FriendItem.self).observe({ [weak self] changes in
+            guard let selfTableView = self?.tableView else { return }
             switch changes {
             case .initial:
-                self.tableView.reloadData()
+                selfTableView.reloadData()
             case .update(_,
                          deletions: let deletions,
                          insertions: let insertions,
                          modifications: let modifications):
-                self.tableView.beginUpdates()
-                self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                selfTableView.beginUpdates()
+                selfTableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
                                   with: .automatic)
-                self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                selfTableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
                                   with: .automatic)
-                self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                selfTableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
                                   with: .automatic)
-                self.tableView.endUpdates()
+                selfTableView.endUpdates()
             case .error(let error):
                 fatalError(error.localizedDescription)
             }

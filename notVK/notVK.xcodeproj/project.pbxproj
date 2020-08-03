@@ -72,6 +72,8 @@
 		8481EC0F24BC94E100ABC2C0 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481EC0E24BC94E100ABC2C0 /* AsyncOperation.swift */; };
 		8481EC1124BC97EF00ABC2C0 /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481EC1024BC97EF00ABC2C0 /* GetDataOperation.swift */; };
 		84962F6D2461F4DB007F1232 /* CustomSectionDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84962F6C2461F4DB007F1232 /* CustomSectionDesign.swift */; };
+		84AEBDC824D810EA00D2E94B /* PromiseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEBDC724D810EA00D2E94B /* PromiseNetworkService.swift */; };
+		84AEBDCB24D81D6100D2E94B /* PromiseRealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEBDCA24D81D6100D2E94B /* PromiseRealmService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +144,8 @@
 		8481EC0E24BC94E100ABC2C0 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		8481EC1024BC97EF00ABC2C0 /* GetDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
 		84962F6C2461F4DB007F1232 /* CustomSectionDesign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSectionDesign.swift; sourceTree = "<group>"; };
+		84AEBDC724D810EA00D2E94B /* PromiseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseNetworkService.swift; sourceTree = "<group>"; };
+		84AEBDCA24D81D6100D2E94B /* PromiseRealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseRealmService.swift; sourceTree = "<group>"; };
 		B910C674E3B00F06541361DD /* Pods-notVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notVK.debug.xcconfig"; path = "Target Support Files/Pods-notVK/Pods-notVK.debug.xcconfig"; sourceTree = "<group>"; };
 		E39DCB62CE468E7C040C1C66 /* Pods_notVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -423,13 +427,14 @@
 		8481EC0224A48FF800ABC2C0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8481EC0D24BC94B900ABC2C0 /* OperationsSharedClasses */,
+				84AEBDC924D81CD500D2E94B /* Promise Shared Classes  */,
+				84430D3C24C068F600F6E293 /* URLSession shared */,
 				8481EBF524A0E86500ABC2C0 /* DateFormatter.swift */,
 				8481EBFE24A0F20200ABC2C0 /* ImageService.swift */,
 				8481EC0024A0F44E00ABC2C0 /* LikeControl.swift */,
-				8481EC0D24BC94B900ABC2C0 /* OperationsSharedClasses */,
 				84430D9524CB73FA00F6E293 /* RealmOperations.swift */,
 				8440DA7E247D2E8E00A72D9B /* RealmRequestService.swift */,
-				84430D3C24C068F600F6E293 /* URLSession shared */,
 				8481EC0324A4905900ABC2C0 /* VKNewsService.swift */,
 				845DAB64246D7661003439FD /* VKRequestService.swift */,
 			);
@@ -473,6 +478,15 @@
 				8468468F24A0CED300E8384F /* News */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		84AEBDC924D81CD500D2E94B /* Promise Shared Classes  */ = {
+			isa = PBXGroup;
+			children = (
+				84AEBDC724D810EA00D2E94B /* PromiseNetworkService.swift */,
+				84AEBDCA24D81D6100D2E94B /* PromiseRealmService.swift */,
+			);
+			path = "Promise Shared Classes ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -601,6 +615,7 @@
 				8481EC1124BC97EF00ABC2C0 /* GetDataOperation.swift in Sources */,
 				0924EF5B2451B5D2003EAB35 /* CustomSwipeCloseTrans.swift in Sources */,
 				841A926224AB535B006DB312 /* NewsOnlineInfo.swift in Sources */,
+				84AEBDCB24D81D6100D2E94B /* PromiseRealmService.swift in Sources */,
 				841A925624AB51C3006DB312 /* NewsVideo.swift in Sources */,
 				841A925E24AB533E006DB312 /* NewsRepostsNews.swift in Sources */,
 				09997FD42432B1E6003891DA /* notVK.xcdatamodeld in Sources */,
@@ -648,6 +663,7 @@
 				09805C522442194B00926BF9 /* ImageRoundedShadowed.swift in Sources */,
 				0944FF032435E4AE001918FB /* GroupsTableViewController.swift in Sources */,
 				84430D3E24C0691A00F6E293 /* GetDataRequest.swift in Sources */,
+				84AEBDC824D810EA00D2E94B /* PromiseNetworkService.swift in Sources */,
 				845DAB67246D78E4003439FD /* VKDataSelector.swift in Sources */,
 				0944FF0A2435F0FE001918FB /* AllGroupsTableViewCell.swift in Sources */,
 			);
