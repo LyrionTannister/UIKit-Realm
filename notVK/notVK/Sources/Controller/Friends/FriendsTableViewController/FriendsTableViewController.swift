@@ -13,65 +13,18 @@ class FriendsTableViewController: UITableViewController {
 
     @IBOutlet private weak var searchTextField: UITextField!
 
-    var friendsContainer: [FriendItem]?
+    private var friendsContainer: [FriendItem]?
     private var token: NotificationToken?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchFriends()
-
-        // MARK: - Table view properties
-
         self.clearsSelectionOnViewWillAppear = false
         
-    }
-
-    private func fetchFriends() {
-        
-        VKRequestService.loadFriends { result in
-            switch result {
-            case .success:
-                self.fetchFriendsFromRealm()
-            case .failure(let error):
-                self.fetchFriendsFromRealm()
-                print(error)
-            }
-        }
+//        RealmOperations.shared.fetchFriendsFromRealm()
+//        loadFriendsFromRealm()
         
     }
-
-    private func fetchFriendsFromRealm() {
-        guard let friendsFromRealm = RealmRequestService.shared.retrieveObjects(FriendItem.self) else { return }
-        self.friendsContainer = friendsFromRealm
-            self.configureRealmNotifications()
-        }
-
-        private func configureRealmNotifications() {
-            
-            guard let realm = try? Realm() else { return }
-            token = realm.objects(FriendItem.self).observe({ [weak self] changes in
-                switch changes {
-                case .initial:
-                    self?.tableView.reloadData()
-                case .update(_,
-                             deletions: let deletions,
-                             insertions: let insertions,
-                             modifications: let modifications):
-                    self?.tableView.beginUpdates()
-                    self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
-                                               with: .automatic)
-                    self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
-                                               with: .automatic)
-                    self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
-                                               with: .automatic)
-                    self?.tableView.endUpdates()
-                case .error(let error):
-                    fatalError(error.localizedDescription)
-                }
-            })
-            
-        }
 
     // MARK: - Table view data source
 
@@ -80,7 +33,7 @@ class FriendsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let uFriendsContainer = friendsContainer else { return 1 }
+        guard let uFriendsContainer = friendsContainer else { return 0 }
         return uFriendsContainer.count
     }
 
@@ -94,11 +47,10 @@ class FriendsTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
-
         let currentFriend = uFriendsContainer[indexPath.row]
         let fullName = currentFriend.lastName + " " + currentFriend.firstName
 
-        let uPhotoURL = URL(string: (currentFriend.photo100) ?? "")
+        let uPhotoURL = URL(string: (currentFriend.friendPhoto100) ?? "")
          
         uCell.configure(with: fullName, friendPhotoURL: uPhotoURL)
         return uCell
@@ -115,55 +67,46 @@ class FriendsTableViewController: UITableViewController {
         }
         
     }
-
-    func getSortedUsers(searchText: String?) -> [Character:[FriendItem]]?{
-        
-        var tempUsers: [FriendItem]?
-        if let text = searchText?.lowercased(), searchText != "" {
-            if let uFriendsContainer = friendsContainer {
-                tempUsers = uFriendsContainer.filter{ $0.lastName.lowercased().contains(text)}
-            }
-        } else {
-            tempUsers = friendsContainer
-        }
-        if let isUsersExists = tempUsers {
-            let sortedUsers = Dictionary.init(grouping: isUsersExists) { $0.lastName.lowercased().first! }.mapValues{ $0.sorted{ $0.lastName.lowercased() < $1.lastName.lowercased() } }
-            return sortedUsers
-        } else {
-            return nil
-        }
-        
-    }
     
-    @IBAction private func cancelButtonPressed(_ sender: Any) {
-        self.view.layoutIfNeeded()
-        UIView.animate(withDuration: 1,
-                       delay: 0,
-                       usingSpringWithDamping: 0.5,
-                       initialSpringVelocity: 0.3,
-                       options: [],
-                       animations: {
-                        self.searchTextField.alpha = 0
-                        self.view.layoutIfNeeded()
-        })
-        
-        searchTextField.text = ""
-        searchTextField.endEditing(true)
-        tableView.reloadData()
-    }
 }
 
-extension FriendsTableViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+extension FriendsTableViewController {
+    
+    //MARK: loadFriendsFromRealm
+    private func loadFriendsFromRealm() {
         
-        //TODO: Needed search realization
-
-        tableView.reloadData()
-              
+        guard let friendsFromRealm = RealmRequestService.shared.retrieveObjects(FriendItem.self) else { return }
+        self.friendsContainer = friendsFromRealm
+        //self.configureFriendRealmNotifications()
+        
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(true)
+    //MARK: configureFriendRealmNotifications
+    private func configureFriendRealmNotifications() {
+        
+        guard let realm = try? Realm() else { return }
+        self.token = realm.objects(FriendItem.self).observe({ [weak self] changes in
+            guard let selfTableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                selfTableView.reloadData()
+            case .update(_,
+                         deletions: let deletions,
+                         insertions: let insertions,
+                         modifications: let modifications):
+                selfTableView.beginUpdates()
+                selfTableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                  with: .automatic)
+                selfTableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                  with: .automatic)
+                selfTableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                  with: .automatic)
+                selfTableView.endUpdates()
+            case .error(let error):
+                fatalError(error.localizedDescription)
+            }
+        })
+        
     }
     
 }

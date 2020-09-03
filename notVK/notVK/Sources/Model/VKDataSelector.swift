@@ -14,7 +14,9 @@ class VKDataSelector {
     
     public static let shared = VKDataSelector()
     
-    let baseUrl = "https://api.vk.com/method/"
+    let scheme = "https"
+    let host = "api.vk.com"
+    let apiVersion = "5.103"
     
     enum Method {
         case getGroups
@@ -25,13 +27,13 @@ class VKDataSelector {
         var methodName: String {
             switch self {
             case .getGroups:
-                return "groups.get"
+                return "/method/groups.get"
             case .getFriends:
-                return "friends.get"
+                return "/method/friends.get"
             case .getPhotos:
-                return "photos.get"
+                return "/method/photos.get"
             case .searchGroups:
-                return "groups.search"
+                return "/method/groups.search"
             }
         }
     }

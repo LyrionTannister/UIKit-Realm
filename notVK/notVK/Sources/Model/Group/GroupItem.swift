@@ -9,13 +9,21 @@
 import Foundation
 import RealmSwift
 
-class GroupItem: Object, Decodable {
-    
-    @objc dynamic var photo50: String? = ""
+class GroupItem: Object, Codable {
+    @objc dynamic var id: Int = 0
     @objc dynamic var name: String = ""
+    @objc dynamic var groupPhotoURL: String = ""
+    
     enum CodingKeys: String, CodingKey {
-        case photo50 = "photo_50"
-        case name = "name"
+        case id
+        case name
+        case groupPhotoURL = "photo_50"
+    }
+    override static func primaryKey() -> String? {
+        return "id"
     }
     
+    override static func indexedProperties() -> [String] {
+        return ["name"]
+    }
 }

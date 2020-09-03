@@ -12,8 +12,9 @@ import WebKit
 class LoginWKViewController: UIViewController {
     
     @IBOutlet private weak var WKLoginView: WKWebView!
-    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+ 
     let notificationCenter = NotificationCenter.default
 
     override func viewDidLoad() {

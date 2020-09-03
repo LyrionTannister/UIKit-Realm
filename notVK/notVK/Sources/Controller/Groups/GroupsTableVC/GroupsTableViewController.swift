@@ -16,28 +16,11 @@ class GroupsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        fetchGroups()
+        
+        //fetchGroups()
         
         // MARK: - Table view properties
         self.clearsSelectionOnViewWillAppear = false
-    }
-    
-    private func fetchGroups() {
-        VKRequestService.loadGroups { result in switch result {
-        case .success:
-            self.fetchGroupsFromRealm()
-        case .failure(let error):
-            self.fetchGroupsFromRealm()
-            print(error)
-            }
-        }
-    }
-    
-    private func fetchGroupsFromRealm() {
-        guard let groupsFromRealm = RealmRequestService.shared.retrieveObjects(GroupItem.self) else { return }
-        self.groupsContainer = groupsFromRealm
-        self.configureRealmNotifications()
     }
 
     private func configureRealmNotifications() {
@@ -82,7 +65,7 @@ class GroupsTableViewController: UITableViewController {
         
         let currentGroup = uGroupsContainer[indexPath.row]
                       
-        let uGroupPhotoURL = URL(string: (currentGroup.photo50) ?? "")
+        let uGroupPhotoURL = URL(string: (currentGroup.groupPhotoURL) ?? "")
 
         uCell.configure(with: currentGroup.name, groupPhotoURL: uGroupPhotoURL)
         return uCell
