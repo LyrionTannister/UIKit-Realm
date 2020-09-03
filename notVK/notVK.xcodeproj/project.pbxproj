@@ -62,6 +62,8 @@
 		845DAB63246D74B7003439FD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 845DAB62246D74B7003439FD /* WebKit.framework */; };
 		845DAB65246D7661003439FD /* VKRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DAB64246D7661003439FD /* VKRequestService.swift */; };
 		845DAB67246D78E4003439FD /* VKDataSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845DAB66246D78E4003439FD /* VKDataSelector.swift */; };
+		845EF3C125011D8E00FD90B7 /* OurNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845EF3BF25011D8E00FD90B7 /* OurNewsCell.swift */; };
+		845EF3C225011D8E00FD90B7 /* OurNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845EF3C025011D8E00FD90B7 /* OurNewsCell.xib */; };
 		8481EBF224A0DAA500ABC2C0 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481EBF124A0DAA500ABC2C0 /* NewsTableViewController.swift */; };
 		8481EBF424A0DB4500ABC2C0 /* NewsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481EBF324A0DB4500ABC2C0 /* NewsItems.swift */; };
 		8481EBF624A0E86500ABC2C0 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481EBF524A0E86500ABC2C0 /* DateFormatter.swift */; };
@@ -134,6 +136,8 @@
 		845DAB62246D74B7003439FD /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		845DAB64246D7661003439FD /* VKRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKRequestService.swift; sourceTree = "<group>"; };
 		845DAB66246D78E4003439FD /* VKDataSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDataSelector.swift; sourceTree = "<group>"; };
+		845EF3BF25011D8E00FD90B7 /* OurNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurNewsCell.swift; sourceTree = "<group>"; };
+		845EF3C025011D8E00FD90B7 /* OurNewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OurNewsCell.xib; sourceTree = "<group>"; };
 		8481EBF124A0DAA500ABC2C0 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		8481EBF324A0DB4500ABC2C0 /* NewsItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItems.swift; sourceTree = "<group>"; };
 		8481EBF524A0E86500ABC2C0 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
@@ -395,7 +399,6 @@
 				09997FD72432B1ED003891DA /* LaunchScreen.storyboard */,
 				09805C422440631700926BF9 /* Main.storyboard */,
 				09997FCF2432B1E6003891DA /* MainScreen.storyboard */,
-				8481EC0B24BC93A000ABC2C0 /* NewsScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -409,6 +412,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		845EF3BE2501197500FD90B7 /* NewsCells */ = {
+			isa = PBXGroup;
+			children = (
+				845EF3BF25011D8E00FD90B7 /* OurNewsCell.swift */,
+				845EF3C025011D8E00FD90B7 /* OurNewsCell.xib */,
+			);
+			path = NewsCells;
+			sourceTree = "<group>";
+		};
 		8468468F24A0CED300E8384F /* News */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,6 +432,8 @@
 		8481EBF924A0EF9C00ABC2C0 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				845EF3BE2501197500FD90B7 /* NewsCells */,
+				8481EC0B24BC93A000ABC2C0 /* NewsScreen.storyboard */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -552,6 +566,7 @@
 				8481EC0C24BC93A000ABC2C0 /* NewsScreen.storyboard in Resources */,
 				09805C4B2441F4D500926BF9 /* Friends.storyboard in Resources */,
 				09805C47244063E300926BF9 /* Groups.storyboard in Resources */,
+				845EF3C225011D8E00FD90B7 /* OurNewsCell.xib in Resources */,
 				09997FD92432B1ED003891DA /* LaunchScreen.storyboard in Resources */,
 				09997FD62432B1ED003891DA /* Assets.xcassets in Resources */,
 				09805C442440631700926BF9 /* Main.storyboard in Resources */,
@@ -630,6 +645,7 @@
 				09A879DD243A6CF900FF7C06 /* FindFriendsTableVC.swift in Sources */,
 				8481EBF224A0DAA500ABC2C0 /* NewsTableViewController.swift in Sources */,
 				8481EBFF24A0F20200ABC2C0 /* ImageService.swift in Sources */,
+				845EF3C125011D8E00FD90B7 /* OurNewsCell.swift in Sources */,
 				84430D9224CB700800F6E293 /* VKItems.swift in Sources */,
 				84430D8B24CA669500F6E293 /* URLStorage.swift in Sources */,
 				841A925A24AB5320006DB312 /* NewsComments.swift in Sources */,

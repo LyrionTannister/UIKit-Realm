@@ -11,11 +11,11 @@ import RealmSwift
 
 class PromiseRealmService<T: Object & Codable> {
     
-    static var shared = PromiseRealmService()
-    
-    private init(){}
-    
-    func loadDataFromRealm() -> (T){
-        
-    }
+//    static var shared = PromiseRealmService()
+//    
+//    private init(){}
+//    
+//    func loadDataFromRealm() -> (T){
+//        
+//    }
 }
